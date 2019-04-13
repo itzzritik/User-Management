@@ -48,7 +48,7 @@ app.get("/git", function(req, res) {
             }, (failed) => {
                 console.log(">  Changes Commit Failed\n>  " + failed);
             });
-    git.push('origin', 'master')
+    git.push('master', 'master')
         .then((success) => {
             console.log(">  Changes Successfully Pushed to Origin Master");
         }, (failed) => {
