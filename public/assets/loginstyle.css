@@ -332,10 +332,10 @@ body {
 }
 
 .profile {
-    float: left;
     width: 200px;
     height: 320px;
     text-align: center;
+    margin: auto;
 }
 
 .profile .image {
@@ -410,7 +410,7 @@ body {
 }
 
 .profile .job {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     line-height: 15px;
 }
 

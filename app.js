@@ -103,7 +103,7 @@ app.post("/profile", function(req, res) {
             console.log(">  Error occured while logging in :\n>  " + e);
         }
         else {
-            res.render("login", {
+            res.render("index", {
                 login: 0,
                 email: result[0].emailId,
                 username: result[0].userName,
