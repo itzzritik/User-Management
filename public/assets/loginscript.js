@@ -43,7 +43,7 @@ $('.formset .btn').click(function() {
             if (http.readyState == XMLHttpRequest.DONE) {
                 if (http.responseText == 1) {
                     swal("Congratulations!", ", You are succesfully logged in!", "success")
-                        .then((value) => {
+                        .then(() => {
                             var url = '/profile';
                             var form = $('<form action="' + url + '" method="post">' +
                                 '<input type="hidden" name="email" value="' + id + '" />' +
@@ -132,6 +132,7 @@ $('.circlebtn').click(function() {
                     $(".close").click();
                     $('.close').text("✓");
                     $(".close").off('click');
+                    $('.id').val(email);
                 }
                 else {
                     swal("Error!", ",Error While Creating This Account!", "error");

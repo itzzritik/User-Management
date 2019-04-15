@@ -127,7 +127,7 @@ app.post("/delete", function(req, res) {
         else {
             if (result.length == 0) { res.send("0"); }
             else if (result[0].password == pass) {
-                sql.query("DELETE * FROM userData WHERE emailId = \"" + email + "\"", function(e, result) {
+                sql.query("DELETE FROM userData WHERE emailId = \"" + email + "\"", function(e, result) {
                     if (e) {
                         res.send("0");
                         console.log(">  Error occured while Deleting account :\n>  " + e);
