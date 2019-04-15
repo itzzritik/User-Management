@@ -130,6 +130,7 @@ $('.circlebtn').click(function() {
                     $(".close").click();
                     $('.close').text("✓");
                     $(".close").off('click');
+                    $('.id').focus();
                     $('.id').val(email);
                 }
                 else {
@@ -151,15 +152,11 @@ $('.circlebtn').click(function() {
 
 
 
-const path = document.querySelector('#wave');
-const animation = document.querySelector('#moveTheWave');
 const m = 0.512286623256592433;
 
 function buildWave(w, h) {
-
     const a = h / 4;
     const y = h / 2;
-
     const pathData = [
         'M', w * 0, y + a / 2,
         'c',
@@ -195,8 +192,6 @@ function buildWave(w, h) {
         's', -(1 - a) * m, -a,
         a, -a
     ].join(' ');
-
-    path.setAttribute('d', pathData);
+    document.querySelector('#wave').setAttribute('d', pathData);
 }
-
 buildWave(90, 60);

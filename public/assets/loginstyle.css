@@ -422,8 +422,10 @@ body {
 .profile .phone img {
     width: 10px;
     height: 10px;
+    padding-top: 1px;
+    padding-bottom: 1px;
     vertical-align: middle;
-    margin-top: -1.5px;
+    margin-top: -2px;
 }
 
 .profile .del {
