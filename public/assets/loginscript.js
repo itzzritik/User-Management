@@ -69,7 +69,12 @@ $('.formset .btn').click(function() {
 });
 
 
-
+$(".b").on("keyup", function(e) {
+    e.target.value = e.target.value.toLowerCase();
+});
+$(".id").on("keyup", function(e) {
+    e.target.value = e.target.value.toLowerCase();
+});
 $(".d").on("keyup", function(e) {
     e.target.value = e.target.value.replace(/[^\d]/, "");
 });
