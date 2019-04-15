@@ -55,6 +55,23 @@ app.get("/git", function(req, res) {
 app.post("/login", function(req, res) {
     var email = req.body.email,
         pass = req.body.pass;
+    sql.query("SELECT password from userData WHERE emailId = \"" + email + "\"", function(e, result) {
+        if (e) {
+            res.send("0");
+            console.log(">  Error occured while logging in :\n>  " + e);
+        }
+        else {
+            if (result.length == 0) {
+                res.send("2");
+            }
+            else if (result[0].password == pass) {
+                res.send("1");
+            }
+            else {
+                res.send("0");
+            }
+        }
+    });
 });
 app.post("/signup", function(req, res) {
     var username = req.body.username,
@@ -63,7 +80,7 @@ app.post("/signup", function(req, res) {
         ph = req.body.ph;
     console.log("\n" + ++call + ") User Creation Started");
     sql.query("INSERT INTO userData (userName, emailId, password, phoneNo) VALUES (\"" + username + "\", \"" + email + "\", \"" + pass + "\", \"" + ph + "\");",
-        function(e, result, fields) {
+        function(e, result) {
             if (e) {
                 res.send("0");
                 console.log(">  Error While Creating Account\n>  " + e);
@@ -71,7 +88,6 @@ app.post("/signup", function(req, res) {
             else {
                 res.send("1");
                 console.log(result);
-                console.log(fields);
             }
         });
 });
