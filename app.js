@@ -63,12 +63,15 @@ app.post("/login", function(req, res) {
         else {
             if (result.length == 0) {
                 res.send("2");
+                console.log(">  Authentication Terminated : User doesn't exist");
             }
             else if (result[0].password == pass) {
                 res.send("1");
+                console.log(">  Authentication Successfull");
             }
             else {
                 res.send("0");
+                console.log(">  Authentication Terminated : Invalid Password");
             }
         }
     });

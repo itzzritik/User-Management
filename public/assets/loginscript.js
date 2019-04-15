@@ -71,6 +71,10 @@ $(".d").on("keyup", function(e) {
     e.target.value = e.target.value.replace(/[^\d]/, "");
 });
 
+function validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
 var username, email, pass, ph, signup = 0;
 $('.circlebtn').click(function() {
     if (signup == 0) {
@@ -78,13 +82,14 @@ $('.circlebtn').click(function() {
         email = $('.b').val();
         pass = $('.c').val();
         ph = $('.d').val();
-        if (username != "" && email != "" && pass != "" && ph.length == 10) {
+        if (username != "" && validateEmail(email) && pass != "" && ph.length == 10) {
             signup = 1;
 
             $(".a").attr("disabled", "disabled");
             $(".b").attr("disabled", "disabled");
             $(".d").attr("disabled", "disabled");
             $('.c').val("");
+            $('.c').focus();
 
             $('.aa').text("Username");
             $('.bb').text("Email");
