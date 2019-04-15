@@ -99,8 +99,6 @@ $('.circlebtn').click(function() {
             $('.cc').text("Confirm Password");
             $('.dd').text("Phone Number");
 
-            $(".c, .d").prop("type", "text");
-
             $('.register-form h2').text("CONFIRM PASSWORD");
             $('.close').css('display', 'none');
             $('.register-form h2').css('color', '#ED2553');
