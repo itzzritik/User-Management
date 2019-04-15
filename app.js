@@ -15,7 +15,6 @@ var call = 0;
 app.set("view engine", "ejs");
 app.use('/public', express.static('public'));
 
-
 app.use(bodyparser.urlencoded({
     extended: true
 }));
@@ -93,6 +92,25 @@ app.post("/signup", function(req, res) {
                 console.log(result);
             }
         });
+});
+
+app.post("/profile", function(req, res) {
+    var email = req.body.email;
+    console.log("\n" + ++call + ") Profile Details Requested\n  > Email: " + email);
+    sql.query("SELECT * from userData WHERE emailId = \"" + email + "\"", function(e, result) {
+        if (e) {
+            res.send("0");
+            console.log(">  Error occured while logging in :\n>  " + e);
+        }
+        else {
+            res.render("login", {
+                login: 0,
+                email: result[0].emailId,
+                username: result[0].userName,
+                ph: result[0].phoneNo,
+            });
+        }
+    });
 });
 
 app.get("/login", function(req, res) {
