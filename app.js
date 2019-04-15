@@ -54,6 +54,7 @@ app.get("/git", function(req, res) {
 app.post("/login", function(req, res) {
     var email = req.body.email,
         pass = req.body.pass;
+    console.log("\n" + ++call + ") Authentication Started");
     sql.query("SELECT password from userData WHERE emailId = \"" + email + "\"", function(e, result) {
         if (e) {
             res.send("0");
