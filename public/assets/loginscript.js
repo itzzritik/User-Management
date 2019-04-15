@@ -130,11 +130,14 @@ $('.circlebtn').click(function() {
                     $(".close").click();
                     $('.close').text("✓");
                     $(".close").off('click');
-                    $('.id').focus();
-                    $('.id').val(email);
+                }
+                else if (http.responseText == 2) {
+                    swal("Error!", "A User With Same Email ID Already Exists!", "error")
+                        .then(() => { window.location.replace("/login"); });
                 }
                 else {
-                    swal("Error!", ",Error While Creating This Account!", "error");
+                    swal("Error!", "Error While Creating This Account!", "error")
+                        .then(() => { window.location.replace("/login"); });
                 }
             }
         };

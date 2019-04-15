@@ -81,17 +81,31 @@ app.post("/signup", function(req, res) {
         pass = req.body.pass,
         ph = req.body.ph;
     console.log("\n" + ++call + ") User Creation Started");
-    sql.query("INSERT INTO userData (userName, emailId, password, phoneNo) VALUES (\"" + username + "\", \"" + email + "\", \"" + pass + "\", \"" + ph + "\");",
-        function(e, result) {
-            if (e) {
-                res.send("0");
-                console.log(">  Error While Creating Account\n>  " + e);
+    sql.query("SELECT password from userData WHERE emailId = \"" + email + "\"", function(e, result) {
+        if (e) {
+            res.send("0");
+            console.log(">  Error occured while logging in :\n>  " + e);
+        }
+        else {
+            if (result.length == 0) {
+                sql.query("INSERT INTO userData (userName, emailId, password, phoneNo) VALUES (\"" + username + "\", \"" + email + "\", \"" + pass + "\", \"" + ph + "\");",
+                    function(e, result) {
+                        if (e) {
+                            res.send("0");
+                            console.log(">  Error While Creating Account\n>  " + e);
+                        }
+                        else {
+                            res.send("1");
+                            console.log(result);
+                        }
+                    });
             }
             else {
-                res.send("1");
-                console.log(result);
+                res.send("2");
+                console.log(">  Account Creation Terminated : User Already Exists");
             }
-        });
+        }
+    });
 });
 
 app.post("/profile", function(req, res) {
