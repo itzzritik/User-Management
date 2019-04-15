@@ -419,6 +419,13 @@ body {
     line-height: 20px;
 }
 
+.profile .phone img {
+    width: 10px;
+    height: 10px;
+    vertical-align: middle;
+    margin-top: -1.5px;
+}
+
 .profile .del {
     width: 120px;
     height: 30px;
