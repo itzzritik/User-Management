@@ -3,13 +3,7 @@ const app = express();
 const bodyparser = require("body-parser");
 const clear = require('clear');
 const git = require('simple-git/promise')();
-
-var sql = require('mysql').createConnection({
-    host: 'db-intern.ciupl0p5utwk.us-east-1.rds.amazonaws.com',
-    user: 'dummyUser',
-    password: 'dummyUser01',
-    database: 'db_intern'
-});
+const sql = require('mysql').createConnection(require("./sql"));
 
 
 sql.connect((e) => {
@@ -63,14 +57,23 @@ app.post("/login", function(req, res) {
         pass = req.body.pass;
 });
 app.post("/signup", function(req, res) {
+    var username = req.body.username,
+        email = req.body.email,
+        pass = req.body.pass,
+        ph = req.body.ph;
     console.log("\n" + ++call + ") User Creation Started");
-    con.connect(function(err) {
-        if (err) throw err;
-        con.query("SELECT * FROM customers", function(err, result, fields) {
-            if (err) throw err;
-            console.log(result);
+    sql.query("INSERT INTO userData (userName, emailId, password, phoneNo) VALUES (" + username + ", " + email + ", " + pass + ", " + ph + ");",
+        function(e, result, fields) {
+            if (e) {
+                res.send("0");
+                console.log(">  Error While Creating Account\n>  " + e);
+            }
+            else {
+                res.send("1");
+                console.log(result);
+                console.log(fields);
+            }
         });
-    });
 });
 
 app.get("/login", function(req, res) {
