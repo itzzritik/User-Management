@@ -36,9 +36,9 @@ $('.btn').click(function() {
     var id = $('.id').val(),
         pass = $('.pass').val();
     if (id != "" && pass != "") {
-        const http = new XMLHttpRequest()
-        http.open('POST', '/login')
-        http.setRequestHeader('Content-type', 'application/json')
+        const http = new XMLHttpRequest();
+        http.open('POST', '/login');
+        http.setRequestHeader('Content-type', 'application/json');
         http.onreadystatechange = function() {
             if (http.readyState == XMLHttpRequest.DONE) {
                 if (http.responseText == 1) {
@@ -59,19 +59,19 @@ $('.btn').click(function() {
                     swal("Please Check Email!", ",This Account Doesn't Exists!", "error");
                 }
             }
-        }
+        };
         http.send(JSON.stringify({
             email: id,
             pass: pass
-        }))
+        }));
     }
 });
 
 $(".d").on("keyup", function(e) {
     e.target.value = e.target.value.replace(/[^\d]/, "");
-})
+});
 
-var username, email, pass, ph, conpass, signup = 0;
+var username, email, pass, ph, signup = 0;
 $('.circlebtn').click(function() {
     if (signup == 0) {
         username = $('.a').val();
@@ -104,10 +104,11 @@ $('.circlebtn').click(function() {
         }
     }
     else if (signup == 1) {
+        if ($('.c').val() != pass) return;
 
-        const http = new XMLHttpRequest()
-        http.open('POST', '/signup')
-        http.setRequestHeader('Content-type', 'application/json')
+        const http = new XMLHttpRequest();
+        http.open('POST', '/signup');
+        http.setRequestHeader('Content-type', 'application/json');
         http.onreadystatechange = function() {
             if (http.readyState == XMLHttpRequest.DONE) {
                 if (http.responseText == 1) {
@@ -124,13 +125,16 @@ $('.circlebtn').click(function() {
                     $('.close').text("✓");
                     $(".close").off('click');
                 }
+                else {
+                    swal("Error!", ",Error While Creating This Account!", "error");
+                }
             }
-        }
+        };
         http.send(JSON.stringify({
             username: username,
             email: email,
-            pass: conpass,
+            pass: pass,
             ph: ph
-        }))
+        }));
     }
 });

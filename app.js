@@ -62,7 +62,7 @@ app.post("/signup", function(req, res) {
         pass = req.body.pass,
         ph = req.body.ph;
     console.log("\n" + ++call + ") User Creation Started");
-    sql.query("INSERT INTO userData (userName, emailId, password, phoneNo) VALUES (" + username + ", " + email + ", " + pass + ", " + ph + ");",
+    sql.query("INSERT INTO userData (userName, emailId, password, phoneNo) VALUES (\"" + username + "\", \"" + email + "\", \"" + pass + "\", \"" + ph + "\");",
         function(e, result, fields) {
             if (e) {
                 res.send("0");
