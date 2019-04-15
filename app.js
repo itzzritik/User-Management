@@ -1,17 +1,18 @@
-var mysql = require('mysql');
 const express = require("express");
 const app = express();
 const bodyparser = require("body-parser");
 const clear = require('clear');
 const git = require('simple-git/promise')();
 
-var connection = mysql.createConnection({
+var sql = require('mysql').createConnection({
     host: 'db-intern.ciupl0p5utwk.us-east-1.rds.amazonaws.com',
     user: 'dummyUser',
     password: 'dummyUser01',
     database: 'db_intern'
 });
-connection.connect((e) => {
+
+
+sql.connect((e) => {
     if (e) { console.log(">  Connection Failed \n>  " + e); return; }
     console.log(">  Connection Established");
 });
@@ -63,10 +64,17 @@ app.post("/login", function(req, res) {
 });
 app.post("/signup", function(req, res) {
     console.log("\n" + ++call + ") User Creation Started");
+    con.connect(function(err) {
+        if (err) throw err;
+        con.query("SELECT * FROM customers", function(err, result, fields) {
+            if (err) throw err;
+            console.log(result);
+        });
+    });
 });
 
 app.get("/login", function(req, res) {
-    res.render("login", { login: 1 });
+    res.render("index", { login: 1 });
 });
 app.get("*", function(req, res) {
     res.redirect("login");
