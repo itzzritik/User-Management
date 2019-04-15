@@ -32,7 +32,7 @@ $('.close').click(function() {
     $(this).closest('.register-form').toggleClass('open');
 });
 
-$('.btn').click(function() {
+$('.formset .btn').click(function() {
     var id = $('.id').val(),
         pass = $('.pass').val();
     if (id != "" && pass != "") {

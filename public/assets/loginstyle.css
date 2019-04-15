@@ -419,6 +419,13 @@ body {
     line-height: 20px;
 }
 
+.profile .del {
+    width: 120px;
+    height: 30px;
+    font-size: 0.8rem;
+    padding: 0px 0px;
+}
+
 svg {
     margin: 0 auto;
     overflow: hidden;
