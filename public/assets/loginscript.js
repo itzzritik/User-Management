@@ -47,6 +47,7 @@ $('.formset .btn').click(function() {
                             var url = '/profile';
                             var form = $('<form action="' + url + '" method="post">' +
                                 '<input type="hidden" name="email" value="' + id + '" />' +
+                                '<input type="hidden" name="pass" value="' + pass + '" />' +
                                 '</form>');
                             $('body').append(form);
                             form.submit();
@@ -67,48 +68,7 @@ $('.formset .btn').click(function() {
     }
 });
 
-$('.del').click(function() {
-    var id = $('.id').val(),
-        pass = $('.pass').val();
-    swal({
-            title: "Are You Sure?",
-            text: "Once Deleted, You Won't Be Able To Recover Your Account!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-        .then((willDelete) => {
-            if (willDelete) {
-                const http = new XMLHttpRequest();
-                http.open('POST', '/delete');
-                http.setRequestHeader('Content-type', 'application/json');
-                http.onreadystatechange = function() {
-                    if (http.readyState == XMLHttpRequest.DONE) {
-                        if (http.responseText == 1) {
-                            swal("Congratulations!", ",Poof! Your Account Has Been Deleted!", "success")
-                                .then((value) => {
-                                    var url = '/login';
-                                    var form = $('<form action="' + url + '" method="post">' +
-                                        '</form>');
-                                    $('body').append(form);
-                                    form.submit();
-                                });
-                        }
-                        else if (http.responseText == 0) {
-                            swal("Alert!", ", Incorrect password!", "error");
-                        }
-                        else if (http.responseText == 2) {
-                            swal("Please Check Email!", ",This Account Doesn't Exists!", "error");
-                        }
-                    }
-                };
-                http.send(JSON.stringify({
-                    email: id,
-                    pass: pass
-                }));
-            }
-        });
-});
+
 
 $(".d").on("keyup", function(e) {
     e.target.value = e.target.value.replace(/[^\d]/, "");

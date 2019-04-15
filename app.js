@@ -95,7 +95,8 @@ app.post("/signup", function(req, res) {
 });
 
 app.post("/profile", function(req, res) {
-    var email = req.body.email;
+    var email = req.body.email,
+        pass = req.body.pass;
     console.log("\n" + ++call + ") Profile Details Requested\n  > Email: " + email);
     sql.query("SELECT * from userData WHERE emailId = \"" + email + "\"", function(e, result) {
         if (e) {
@@ -106,6 +107,7 @@ app.post("/profile", function(req, res) {
             res.render("index", {
                 login: 0,
                 email: result[0].emailId,
+                pass: pass,
                 username: result[0].userName,
                 ph: result[0].phoneNo,
             });
