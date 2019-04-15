@@ -95,7 +95,7 @@
                         http.onreadystatechange = function() {
                             if (http.readyState == XMLHttpRequest.DONE) {
                                 if (http.responseText == 1) {
-                                    swal("Congratulations!", "Poof! Your Account Has Been Deleted!", "success")
+                                    swal("Successfull!", "Poof! Your Account Has Been Deleted!", "success")
                                         .then((value) => {
                                             window.location.replace("/login");
                                         });
