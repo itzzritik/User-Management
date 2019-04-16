@@ -38,7 +38,7 @@ app.get("/git", function(req, res) {
     git.commit(m)
         .then(
             (successCommit) => {
-                console.log("  > Changes Successfully Commited\n   >  Message : \"" + m + "\"");
+                console.log("  > Changes Successfully Commited\n     >  Message : \"" + m + "\"");
             }, (failed) => {
                 console.log("  > Changes Commit Failed\n>  " + failed);
             });
