@@ -9,6 +9,7 @@
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "mysql": "^2.16.0",
+    "random-profile-generator": "^2.3.0",
     "simple-git": "^1.110.0"
   },
   "devDependencies": {},

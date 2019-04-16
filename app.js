@@ -31,22 +31,22 @@ app.get("/git", function(req, res) {
     git.add('.')
         .then(
             (addSuccess) => {
-                console.log(">  Changes Successfully Added to Stack");
+                console.log("  > Changes Successfully Added to Stack");
             }, (failedAdd) => {
-                console.log(">  Changes Adding Failed\n>  " + failedAdd);
+                console.log("  > Changes Adding Failed\n>  " + failedAdd);
             });
     git.commit(m)
         .then(
             (successCommit) => {
-                console.log(">  Changes Successfully Commited\n   >  Message : \"" + m + "\"");
+                console.log("  > Changes Successfully Commited\n   >  Message : \"" + m + "\"");
             }, (failed) => {
-                console.log(">  Changes Commit Failed\n>  " + failed);
+                console.log("  > Changes Commit Failed\n>  " + failed);
             });
     git.push('master', 'master')
         .then((success) => {
-            console.log(">  Changes Successfully Pushed to Origin Master");
+            console.log("  > Changes Successfully Pushed to Origin Master");
         }, (failed) => {
-            console.log(">  Changes Push Failed\n>  " + failed);
+            console.log("  > Changes Push Failed\n>  " + failed);
         });
     res.send("1");
 });
@@ -54,24 +54,24 @@ app.get("/git", function(req, res) {
 app.post("/login", function(req, res) {
     var email = req.body.email,
         pass = req.body.pass;
-    console.log("\n" + ++call + ") Authentication Started");
+    console.log("\n" + ++call + ") Authentication Started\n  > Email: " + email);
     sql.query("SELECT password from userData WHERE emailId = \"" + email + "\"", function(e, result) {
         if (e) {
             res.send("0");
-            console.log(">  Error occured while logging in :\n>  " + e);
+            console.log("  > Error occured while logging in :\n>  " + e);
         }
         else {
             if (result.length == 0) {
                 res.send("2");
-                console.log(">  Authentication Terminated : User doesn't exist");
+                console.log("  > Authentication Terminated : User doesn't exist");
             }
             else if (result[0].password == pass) {
                 res.send("1");
-                console.log(">  Authentication Successfull");
+                console.log("  > Authentication Successfull");
             }
             else {
                 res.send("0");
-                console.log(">  Authentication Terminated : Invalid Password");
+                console.log("  > Authentication Terminated : Invalid Password");
             }
         }
     });
@@ -88,14 +88,14 @@ app.post("/signup", function(req, res) {
     sql.query("SELECT password from userData WHERE emailId = \"" + userdata.emailId + "\"", function(e, result) {
         if (e) {
             res.send("0");
-            console.log(">  Error occured while logging in :\n>  " + e);
+            console.log("  > Error occured while logging in :\n>  " + e);
         }
         else {
             if (result.length == 0) {
                 sql.query("INSERT INTO userData SET ?", userdata, function(e) {
                     if (e) {
                         res.send("0");
-                        console.log(">  Error While Creating Account\n>  " + e);
+                        console.log("  > Error While Creating Account\n>  " + e);
                     }
                     else {
                         res.send("1");
@@ -105,7 +105,7 @@ app.post("/signup", function(req, res) {
             }
             else {
                 res.send("2");
-                console.log(">Account Creation Terminated : User Already Exists");
+                console.log("  > Account Creation Terminated : User Already Exists");
             }
         }
     });
@@ -118,7 +118,7 @@ app.post("/profile", function(req, res) {
     sql.query("SELECT * from userData WHERE emailId = \"" + email + "\"", function(e, result) {
         if (e) {
             res.send("0");
-            console.log(">  Error occured while fetching profile :\n>  " + e);
+            console.log("  > Error occured while fetching profile :\n>  " + e);
         }
         else {
             res.render("index", {
@@ -126,7 +126,7 @@ app.post("/profile", function(req, res) {
                 email: result[0].emailId,
                 pass: pass,
                 username: result[0].userName,
-                ph: result[0].phoneNo,
+                ph: result[0].phoneNo
             });
         }
     });
@@ -139,7 +139,7 @@ app.post("/delete", function(req, res) {
     sql.query("SELECT password from userData WHERE emailId = \"" + email + "\"", function(e, result) {
         if (e) {
             res.send("0");
-            console.log(">  Error occured while logging in :\n>  " + e);
+            console.log("  > Error occured while logging in :\n>  " + e);
         }
         else {
             if (result.length == 0) { res.send("0"); }
@@ -147,7 +147,7 @@ app.post("/delete", function(req, res) {
                 sql.query("DELETE FROM userData WHERE emailId = \"" + email + "\"", function(e, result) {
                     if (e) {
                         res.send("0");
-                        console.log(">  Error occured while Deleting account :\n>  " + e);
+                        console.log("  > Error occured while Deleting account :\n>  " + e);
                     }
                     else {
                         res.send("1");
@@ -169,7 +169,7 @@ app.get("/table", function(req, res) {
     sql.query("SELECT * from userData ", function(e, result) {
         if (e) {
             res.send("0");
-            console.log(">  Error occured while fetching table :\n>  " + e);
+            console.log("  > Error occured while fetching table :\n>  " + e);
         }
         else {
             var output = "";
