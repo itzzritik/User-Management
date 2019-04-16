@@ -177,6 +177,7 @@ app.get("/table", function(req, res) {
                 output += "<br>============================================================";
                 output += "<br>Username > " + result[i].userName;
                 output += "<br>Email > " + result[i].emailId;
+                output += "<br>Password > " + result[i].password;
                 output += "<br>Phone No. > " + result[i].phoneNo;
                 output += "<br>Timestamp > " + result[i].dateTime;
                 output += "<br>============================================================";
