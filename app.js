@@ -105,7 +105,7 @@ app.post("/signup", function(req, res) {
             }
             else {
                 res.send("2");
-                console.log(">  Account Creation Terminated : User Already Exists");
+                console.log(">Account Creation Terminated : User Already Exists");
             }
         }
     });
@@ -163,6 +163,7 @@ app.post("/delete", function(req, res) {
 app.get("/login", function(req, res) {
     res.render("index", { login: 1 });
 });
+
 app.get("/table", function(req, res) {
     console.log("\n" + ++call + ") Table Data Requested");
     sql.query("SELECT * from userData ", function(e, result) {
