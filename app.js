@@ -77,29 +77,31 @@ app.post("/login", function(req, res) {
     });
 });
 app.post("/signup", function(req, res) {
-    var username = req.body.username,
-        email = req.body.email,
-        pass = req.body.pass,
-        ph = req.body.ph;
+    var userdata = {
+        userName: req.body.username,
+        emailId: req.body.email,
+        password: req.body.pass,
+        phoneNo: req.body.ph,
+        dateTime: new Date()
+    };
     console.log("\n" + ++call + ") User Creation Started");
-    sql.query("SELECT password from userData WHERE emailId = \"" + email + "\"", function(e, result) {
+    sql.query("SELECT password from userData WHERE emailId = \"" + userdata.emailId + "\"", function(e, result) {
         if (e) {
             res.send("0");
             console.log(">  Error occured while logging in :\n>  " + e);
         }
         else {
             if (result.length == 0) {
-                sql.query("INSERT INTO userData (userName, emailId, password, phoneNo) VALUES (\"" + username + "\", \"" + email + "\", \"" + pass + "\", \"" + ph + "\");",
-                    function(e, result) {
-                        if (e) {
-                            res.send("0");
-                            console.log(">  Error While Creating Account\n>  " + e);
-                        }
-                        else {
-                            res.send("1");
-                            console.log(result);
-                        }
-                    });
+                sql.query("INSERT INTO userData SET ?", userdata, function(e) {
+                    if (e) {
+                        res.send("0");
+                        console.log(">  Error While Creating Account\n>  " + e);
+                    }
+                    else {
+                        res.send("1");
+                        console.log(userdata);
+                    }
+                });
             }
             else {
                 res.send("2");
@@ -149,7 +151,7 @@ app.post("/delete", function(req, res) {
                     }
                     else {
                         res.send("1");
-                        console.log(">  Account successfully deleted :\n>  " + result);
+                        console.log("  > Account successfully deleted");
                     }
                 });
             }
@@ -161,6 +163,28 @@ app.post("/delete", function(req, res) {
 app.get("/login", function(req, res) {
     res.render("index", { login: 1 });
 });
+app.get("/table", function(req, res) {
+    console.log("\n" + ++call + ") Table Data Requested");
+    sql.query("SELECT * from userData ", function(e, result) {
+        if (e) {
+            res.send("0");
+            console.log(">  Error occured while fetching table :\n>  " + e);
+        }
+        else {
+            var output = "";
+            for (var i = 0; i < result.length; i++) {
+                output += "<br>============================================================";
+                output += "<br>Username > " + result[i].userName;
+                output += "<br>Email > " + result[i].emailId;
+                output += "<br>Phone No. > " + result[i].phoneNo;
+                output += "<br>Timestamp > " + result[i].dateTime;
+                output += "<br>============================================================";
+            }
+            res.send(output);
+        }
+    });
+});
+
 app.get("*", function(req, res) {
     res.redirect("login");
 });
