@@ -2,7 +2,7 @@
 
 var itemsPerRow = parseInt($(window).width() / 430);
 var itemsPerColumn = parseInt(($(window).height() + 50) / 140);
-alert(itemsPerColumn);
+//alert(itemsPerColumn);
 
 var margin = (($(window).width() % 430) / 2);
 $('.container').css('margin-left', margin + 20 + 'px');
@@ -55,11 +55,11 @@ http.onload = function() {
         '</div></div></div></div>';
       $('.container').append(element);
       if (++i < data.length) {
-        if (i > itemsPerColumn) {
+        if (i > itemsPerColumn * itemsPerRow) {
           $('.body').css("overflow-y", "auto");
           addCards(i, 0);
         }
-        if (i % itemsPerRow == 0) addCards(i, 500);
+        else if (i % itemsPerRow == 0) addCards(i, 500);
         else addCards(i, 0);
       }
     }, delay);
