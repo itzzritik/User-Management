@@ -4,7 +4,8 @@
   user-select: none;
 }
 
-body, html {
+body,
+html {
   margin: 0;
   background: rgb(221, 221, 221);
   color: #7a7b7c;
@@ -14,10 +15,15 @@ body {
   font-family: "Raleway", "Microsoft JhengHei", Arial, sans-serif;
 }
 
-.element{
+.container {
+  width: 100%;
+  margin-top: 50px;
+}
+
+.element {
   position: relative;
-  width: 400px;
-  height: 160px;
+  width: 430px;
+  height: 140px;
   float: left;
 }
 
@@ -39,13 +45,15 @@ body {
     width: 0;
   }
 }
+
 @keyframes hide-profile {
   100% {
     width: 0;
   }
 }
 
-.profile .photo, .profile .content {
+.profile .photo,
+.profile .content {
   box-sizing: border-box;
 }
 
@@ -104,7 +112,8 @@ body {
   margin-left: 50px;
 }
 
-.profile .content .text h3, .profile .content .text h6 {
+.profile .content .text h3,
+.profile .content .text h6 {
   font-weight: normal;
   margin: 3px 0;
   letter-spacing: 0.5px;
@@ -135,6 +144,7 @@ body {
     transform: scale(1);
   }
 }
+
 @keyframes popout-btn {
   100% {
     transform: scale(0);
