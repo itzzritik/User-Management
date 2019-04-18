@@ -55,18 +55,17 @@ http.onload = function() {
         '</div></div></div></div>';
       $('.container').append(element);
       if (++i < data.length) {
+        if (i < itemsPerColumn * itemsPerRow) {
+          addCards(i, 100);
+        }
+        else if (i == itemsPerColumn * itemsPerRow) {
+          addCards(i, 500);
+        }
         if (i > itemsPerColumn * itemsPerRow) {
           addCards(i, 0);
           if (i == data.length - 1) {
             setTimeout(function() { $('body, html').css("overflow-y", "auto"); }, 500);
           }
-        }
-        else if (i % itemsPerRow == 0) {
-          addCards(i, 500);
-        }
-        else {
-          addCards(i, 0);
-
         }
       }
     }, delay);
