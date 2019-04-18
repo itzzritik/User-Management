@@ -22,9 +22,12 @@ var del = function(card) {
   }, 100);
   setTimeout(function() {
     card.find(".photo").css("animation", "rotate-photo-reverse 0.5s forwards ease-in-out");
-    card.find(".content").css("animation", "hide-content 0.5s forwards ease-in-out");
     card.css("animation", "hide-profile 0.5s forwards ease-in-out");
-    setTimeout(function() { card.find(".photo").css("animation", "popout-btn 0.3s both ease-in-out 0.5s"); }, 460);
+    card.find(".photo").css("transform", "translateX(-10px)");
+    setTimeout(function() {
+      card.find(".content").remove();
+      card.find(".photo").css("animation", "popout-btn 0.3s both ease-in-out 0.5s");
+    }, 460);
     setTimeout(function() { card.parent().remove(); }, 1500);
   }, 1000);
 };
