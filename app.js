@@ -17,9 +17,8 @@ function connectionHandler() {
     });
     sql.on('error', function(err) {
         console.log("\n" + ++call + ") Connection to MySQL Server Failed");
-        console.log('>  Connection Timeout', err);
         if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-            console.log('>  Error Code: ', err.code);
+            console.log('   >  Error Code: ', err.code);
             console.log('>  Attempting Reconnection');
             connectionHandler();
         }
@@ -56,7 +55,7 @@ app.get("/git", function(req, res) {
             (successCommit) => {
                 console.log(">  Changes Successfully Commited\n   >  Message : \"" + m + "\"");
             }, (failed) => {
-                console.log(">  Changes Commit Failed\n   >  " + failed);
+                console.log(">  Changes Commit Failed\n>  " + failed);
             });
     git.push('master', 'master')
         .then((success) => {
