@@ -213,6 +213,17 @@ app.get("/admin", function(req, res) {
         }
     });
 });
+app.post("/admin", function(req, res) {
+    sql.query("SELECT * from userData ", function(e, result) {
+        if (e) {
+            res.send("0");
+            console.log(">  Error occured while fetching table :\n   >  " + e);
+        }
+        else {
+            res.json(result);
+        }
+    });
+});
 
 app.get("*", function(req, res) {
     res.redirect("login");
