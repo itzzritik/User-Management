@@ -7,27 +7,26 @@ $(window).resize(function() { layout(); });
 
 function layout() {
   var zoomlvl = $(window).width() / 430;
-  itemsPerRow = parseInt($(window).width() / (430 * zoomlvl), 10);
-  itemsPerColumn = parseInt(($(window).height() + 50) / (140 * zoomlvl), 10);
+  itemsPerRow = parseInt($(window).width() / (430), 10);
+  itemsPerColumn = parseInt(($(window).height() + 50) / (140), 10);
 
   if ($(window).width() < 430) {
     itemsPerRow = 1;
+    itemsPerRow = parseInt($(window).width() / (430 * zoomlvl), 10);
+    itemsPerColumn = parseInt(($(window).height() + 50) / (140 * zoomlvl), 10);
     $('body').css({ zoom: zoomlvl, '-moz-transform': 'scale(' + zoomlvl + ')' });
     $('.container').css('margin-left', +20 + 'px');
     $('.container').css('margin-right', -20 + 'px');
   }
   else {
-    $('body').css({ zoom: 1, '-moz-transform': 'scale(1)' });
-
     var margin = (($(window).width() % 430) / 2);
+
+    $('body').css({ zoom: 1, '-moz-transform': 'scale(1)' });
     $('.container').css('margin-left', margin + 20 + 'px');
     $('.container').css('margin-right', margin - 20 + 'px');
   }
-  //console.log(itemsPerColumn);
 }
 layout();
-
-
 
 $('.container').on('click', '.btn', function() {
   swal({
@@ -43,7 +42,7 @@ $('.container').on('click', '.btn', function() {
         card.find('.circle_loader').addClass('animation');
         card.find('.btn').addClass('animation_circle');
         card.find('.profile').addClass('animation_card');
-        console.log(card.find('#emailId').text());
+        console.log(card.find('#emailId').text() + " Deleted Successfully");
         del(card);
       }
     });
