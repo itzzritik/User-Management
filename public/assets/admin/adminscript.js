@@ -23,12 +23,14 @@ var del = function(card) {
   setTimeout(function() {
     card.find(".photo").css("animation", "rotate-photo-reverse 0.5s forwards ease-in-out");
     card.css("animation", "hide-profile 0.5s forwards ease-in-out");
-    card.find(".photo").css("transform", "translateX(-10px)");
+    card.css("margin-left", "-20px");
+    card.css("transition-duration", "0.5s");
     setTimeout(function() {
       card.find(".content").remove();
       card.find(".photo").css("animation", "popout-btn 0.3s both ease-in-out 0.5s");
     }, 460);
-    setTimeout(function() { card.parent().remove(); }, 1500);
+    setTimeout(function() { card.parent().css("animation", "hide-card 0.3s both ease-in-out 0.5s"); }, 800);
+    setTimeout(function() { card.parent().remove(); }, 2000);
   }, 1000);
 };
 

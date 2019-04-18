@@ -56,6 +56,13 @@ body {
   }
 }
 
+@keyframes hide-card {
+  100% {
+    width: 0;
+    height: 0;
+  }
+}
+
 .profile .photo,
 .profile .content {
   box-sizing: border-box;
@@ -71,7 +78,7 @@ body {
   margin-left: -50px;
   box-shadow: 0 0 0.5rem #babbbc;
   animation: rotate-photo 0.5s forwards ease-in-out;
-  transition: all 0.5s ease-in-out;
+  ;
 }
 
 @keyframes rotate-photo {
