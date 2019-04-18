@@ -3,9 +3,9 @@ const app = express();
 const bodyparser = require("body-parser");
 const clear = require('clear');
 const git = require('simple-git/promise')();
-const sql = require('mysql');
+connectionHandler(require('mysql'));
 
-function connectionHandler() {
+function connectionHandler(sql) {
     var sqlcon = sql.createConnection(require("./sql"));
     sqlcon.connect((e) => {
         if (e) {
@@ -22,12 +22,9 @@ function connectionHandler() {
             console.log('>  Attempting Reconnection');
             connectionHandler();
         }
-        else {
-            throw err;
-        }
+        else { throw err; }
     });
 }
-connectionHandler();
 
 var call = 0;
 app.set("view engine", "ejs");
