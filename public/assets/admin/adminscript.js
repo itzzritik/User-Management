@@ -3,11 +3,24 @@
 
 var itemsPerRow = parseInt($(window).width() / 430, 10);
 var itemsPerColumn = parseInt(($(window).height() + 50) / 140, 10);
-//alert(itemsPerColumn);
 
-var margin = (($(window).width() % 430) / 2);
-$('.container').css('margin-left', margin + 20 + 'px');
-$('.container').css('margin-right', margin - 20 + 'px');
+$(window).resize(function() { layout(); });
+
+function layout() {
+  if ($(window).width() < 430) {
+    itemsPerRow = 1;
+    $('body').css({
+      zoom: 0.5,
+      '-moz-transform': 'scale(0.5)'
+    });
+  }
+  var margin = (($(window).width() % 430) / 2);
+  $('.container').css('margin-left', margin + 20 + 'px');
+  $('.container').css('margin-right', margin - 20 + 'px');
+}
+layout();
+
+
 
 $('.container').on('click', '.btn', function() {
   swal({
