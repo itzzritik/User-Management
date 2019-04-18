@@ -1,22 +1,29 @@
 /* global $ */
 /* global swal */
 
-var itemsPerRow = parseInt($(window).width() / 430, 10);
-var itemsPerColumn = parseInt(($(window).height() + 50) / 140, 10);
+var itemsPerRow, itemsPerColumn;
 
 $(window).resize(function() { layout(); });
 
 function layout() {
+  var zoomlvl = $(window).width() / 430;
+  itemsPerRow = parseInt($(window).width() / (430 * zoomlvl), 10);
+  itemsPerColumn = parseInt(($(window).height() + 50) / (140 * zoomlvl), 10);
+
   if ($(window).width() < 430) {
     itemsPerRow = 1;
-    $('body').css({
-      zoom: 0.7,
-      '-moz-transform': 'scale(0.7)'
-    });
+    $('body').css({ zoom: zoomlvl, '-moz-transform': 'scale(' + zoomlvl + ')' });
+    $('.container').css('margin-left', +20 + 'px');
+    $('.container').css('margin-right', -20 + 'px');
   }
-  var margin = (($(window).width() % 430) / 2);
-  $('.container').css('margin-left', margin + 20 + 'px');
-  $('.container').css('margin-right', margin - 20 + 'px');
+  else {
+    $('body').css({ zoom: 1, '-moz-transform': 'scale(1)' });
+
+    var margin = (($(window).width() % 430) / 2);
+    $('.container').css('margin-left', margin + 20 + 'px');
+    $('.container').css('margin-right', margin - 20 + 'px');
+  }
+  //console.log(itemsPerColumn);
 }
 layout();
 
