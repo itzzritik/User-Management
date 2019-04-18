@@ -1,7 +1,8 @@
 /* global $ */
+/* global swal */
 
-var itemsPerRow = parseInt($(window).width() / 430);
-var itemsPerColumn = parseInt(($(window).height() + 50) / 140);
+var itemsPerRow = parseInt($(window).width() / 430, 10);
+var itemsPerColumn = parseInt(($(window).height() + 50) / 140, 10);
 //alert(itemsPerColumn);
 
 var margin = (($(window).width() % 430) / 2);
@@ -9,12 +10,23 @@ $('.container').css('margin-left', margin + 20 + 'px');
 $('.container').css('margin-right', margin - 20 + 'px');
 
 $('.container').on('click', '.btn', function() {
-  var card = $(this).parent().parent();
-  card.find('.circle_loader').addClass('animation');
-  card.find('.btn').addClass('animation_circle');
-  card.find('.profile').addClass('animation_card');
-  console.log(card.find('#emailId').text());
-  del(card);
+  swal({
+      title: "Are You Sure?",
+      text: "Deleted Accounts Cannot Be Recovered!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        var card = $(this).parent().parent();
+        card.find('.circle_loader').addClass('animation');
+        card.find('.btn').addClass('animation_circle');
+        card.find('.profile').addClass('animation_card');
+        console.log(card.find('#emailId').text());
+        del(card);
+      }
+    });
 });
 var del = function(card) {
   setTimeout(function() {

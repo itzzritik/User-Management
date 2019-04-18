@@ -203,17 +203,10 @@ app.get("/table", function(req, res) {
     });
 });
 app.get("/admin", function(req, res) {
-    sql.query("SELECT * from userData ", function(e, result) {
-        if (e) {
-            res.send("0");
-            console.log(">  Error occured while fetching table :\n   >  " + e);
-        }
-        else {
-            res.render("admin", { data: result });
-        }
-    });
+    res.render("admin");
 });
 app.post("/admin", function(req, res) {
+    console.log("\n" + ++call + ") Table Data Requested in Admin Panel");
     sql.query("SELECT * from userData ", function(e, result) {
         if (e) {
             res.send("0");
