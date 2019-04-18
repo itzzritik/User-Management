@@ -10,7 +10,7 @@ connectionHandler();
 function connectionHandler() {
     sql.connect((e) => {
         if (e) {
-            console.log(">  Connection Failed \n>  " + e);
+            console.log(">  Connection Failed \n•  " + e);
             setTimeout(connectionHandler, 2000);
         }
         else { console.log(">  Connection Established"); }
