@@ -10,10 +10,10 @@ $('.container').css('margin-right', margin - 20 + 'px');
 
 $('.container').on('click', '.btn', function() {
   var card = $(this).parent().parent();
-  console.log(card);
   card.find('.circle_loader').addClass('animation');
   card.find('.btn').addClass('animation_circle');
   card.find('.profile').addClass('animation_card');
+  console.log(card.find('#emailId').text());
   del(card);
 });
 var del = function(card) {
@@ -22,10 +22,10 @@ var del = function(card) {
   }, 100);
   setTimeout(function() {
     card.find(".photo").css("animation", "rotate-photo-reverse 0.5s forwards ease-in-out");
+    card.find(".content").css("animation", "hide-content 0.5s forwards ease-in-out");
     card.css("animation", "hide-profile 0.5s forwards ease-in-out");
-    setTimeout(function() {
-      card.find(".photo").css("animation", "popout-btn 0.3s both ease-in-out 0.5s");
-    }, 460);
+    setTimeout(function() { card.find(".photo").css("animation", "popout-btn 0.3s both ease-in-out 0.5s"); }, 460);
+    setTimeout(function() { card.parent().remove(); }, 1500);
   }, 1000);
 };
 
@@ -46,7 +46,7 @@ http.onload = function() {
         '<div class="content">' +
         '<div class="text">' +
         '<h3>' + data[i].userName + '</h3>' +
-        '<h6>' + data[i].emailId + '</h6>' +
+        '<h6 id="emailId">' + data[i].emailId + '</h6>' +
         '<h6>' + data[i].phoneNo + '</h6>' +
         '</div>' +
         '<div class="btn">' +

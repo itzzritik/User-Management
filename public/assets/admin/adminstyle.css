@@ -55,6 +55,12 @@ body {
   }
 }
 
+@keyframes hide-content {
+  100% {
+    opacity: 0;
+  }
+}
+
 .profile .photo,
 .profile .content {
   box-sizing: border-box;
