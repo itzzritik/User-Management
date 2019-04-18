@@ -3,13 +3,31 @@ const app = express();
 const bodyparser = require("body-parser");
 const clear = require('clear');
 const git = require('simple-git/promise')();
-const sql = require('mysql').createConnection(require("./sql"));
+const sql = require('mysql');
 
-
-sql.connect((e) => {
-    if (e) { console.log(">  Connection Failed \n>  " + e); return; }
-    console.log(">  Connection Established");
-});
+function connectionHandler() {
+    var sqlcon = sql.createConnection(require("./sql"));
+    sqlcon.connect((e) => {
+        if (e) {
+            console.log(">  Connection Failed \n>  " + e);
+            setTimeout(connectionHandler, 2000);
+        }
+        else { console.log(">  Connection Established"); }
+    });
+    sqlcon.on('error', function(err) {
+        console.log("\n" + ++call + ") Connection to MySQL Server Failed");
+        console.log('>  Connection Timeout', err);
+        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+            console.log('>  Error Code: ', err.code);
+            console.log('>  Attempting Reconnection');
+            connectionHandler();
+        }
+        else {
+            throw err;
+        }
+    });
+}
+connectionHandler();
 
 var call = 0;
 app.set("view engine", "ejs");
@@ -172,7 +190,7 @@ app.get("/table", function(req, res) {
             console.log("  > Error occured while fetching table :\n>  " + e);
         }
         else {
-            var output = "";
+            var output = result.length + " <br>";
             for (var i = 0; i < result.length; i++) {
                 output += "<br>============================================================";
                 output += "<br>Username > " + result[i].userName;
