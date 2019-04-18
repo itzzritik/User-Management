@@ -3,18 +3,19 @@ const app = express();
 const bodyparser = require("body-parser");
 const clear = require('clear');
 const git = require('simple-git/promise')();
-const sql = connectionHandler(require('mysql'), require("./sql"));
+const sql = require('mysql').createConnection(require("./sql"));
 
-function connectionHandler(sql, config) {
-    var sqlcon = sql.createConnection(config);
-    sqlcon.connect((e) => {
+connectionHandler();
+
+function connectionHandler() {
+    sql.connect((e) => {
         if (e) {
             console.log(">  Connection Failed \n>  " + e);
             setTimeout(connectionHandler, 2000);
         }
         else { console.log(">  Connection Established"); }
     });
-    sqlcon.on('error', function(err) {
+    sql.on('error', function(err) {
         console.log("\n" + ++call + ") Connection to MySQL Server Failed");
         console.log('>  Connection Timeout', err);
         if (err.code === 'PROTOCOL_CONNECTION_LOST') {
