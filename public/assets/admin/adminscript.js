@@ -10,8 +10,8 @@ function layout() {
   if ($(window).width() < 430) {
     itemsPerRow = 1;
     $('body').css({
-      zoom: 0.5,
-      '-moz-transform': 'scale(0.5)'
+      zoom: 0.7,
+      '-moz-transform': 'scale(0.7)'
     });
   }
   var margin = (($(window).width() % 430) / 2);
