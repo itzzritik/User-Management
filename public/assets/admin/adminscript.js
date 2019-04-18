@@ -1,8 +1,10 @@
 /* global $ */
 
-var itemsPerRow = parseInt($(window).width() / $('.element').width());
-alert(itemsPerRow);
-var margin = (($(window).width() % $('.element').width()) / 2);
+var itemsPerRow = parseInt($(window).width() / 430);
+var itemsPerColumn = parseInt(($(window).height() + 50) / 140);
+alert(itemsPerColumn);
+
+var margin = (($(window).width() % 430) / 2);
 $('.container').css('margin-left', margin + 20 + 'px');
 $('.container').css('margin-right', margin - 20 + 'px');
 
@@ -53,7 +55,11 @@ http.onload = function() {
         '</div></div></div></div>';
       $('.container').append(element);
       if (++i < data.length) {
-        if (i % 3 == 0) addCards(i, 500);
+        if (i > itemsPerColumn) {
+          $('.body').css("overflow-y", "auto");
+          addCards(i, 0);
+        }
+        if (i % itemsPerRow == 0) addCards(i, 500);
         else addCards(i, 0);
       }
     }, delay);

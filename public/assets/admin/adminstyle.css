@@ -15,6 +15,7 @@ html {
 
 body {
   font-family: "Raleway", "Microsoft JhengHei", Arial, sans-serif;
+  overflow-y: hidden;
 }
 
 .container {
