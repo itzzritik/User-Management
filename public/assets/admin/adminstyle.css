@@ -10,12 +10,12 @@ html {
   background: rgb(221, 221, 221);
   color: #7a7b7c;
   overflow-x: hidden;
+  overflow-y: hidden;
   padding-bottom: 50px;
 }
 
 body {
   font-family: "Raleway", "Microsoft JhengHei", Arial, sans-serif;
-  overflow-y: hidden;
 }
 
 .container {

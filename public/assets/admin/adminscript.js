@@ -8,7 +8,7 @@ var margin = (($(window).width() % 430) / 2);
 $('.container').css('margin-left', margin + 20 + 'px');
 $('.container').css('margin-right', margin - 20 + 'px');
 
-$('.btn').click(function() {
+$('.container').on('click', '.btn', function() {
   var card = $(this).parent().parent();
   console.log(card);
   card.find('.circle_loader').addClass('animation');
@@ -25,7 +25,7 @@ var del = function(card) {
     card.css("animation", "hide-profile 0.5s forwards ease-in-out");
     setTimeout(function() {
       card.find(".photo").css("animation", "popout-btn 0.3s both ease-in-out 0.5s");
-    }, 480);
+    }, 460);
   }, 1000);
 };
 
@@ -56,11 +56,18 @@ http.onload = function() {
       $('.container').append(element);
       if (++i < data.length) {
         if (i > itemsPerColumn * itemsPerRow) {
-          $('.body').css("overflow-y", "auto");
           addCards(i, 0);
+          if (i == data.length - 1) {
+            setTimeout(function() { $('body, html').css("overflow-y", "auto"); }, 500);
+          }
         }
-        else if (i % itemsPerRow == 0) addCards(i, 500);
-        else addCards(i, 0);
+        else if (i % itemsPerRow == 0) {
+          addCards(i, 500);
+        }
+        else {
+          addCards(i, 0);
+
+        }
       }
     }, delay);
   }
