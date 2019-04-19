@@ -139,16 +139,16 @@ $('.circlebtn').click(function() {
 				type: 'warning',
 				theme: 'metroui',
 				layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-				timeout: 2000
+				timeout: 3000
 			}).show();
 		}
-		else if (validateEmail(email)) {
+		else if (!validateEmail(email)) {
 			new Noty({
 				text: "This email doesn't look right!",
 				type: 'warning',
 				theme: 'metroui',
 				layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-				timeout: 2000
+				timeout: 3000
 			}).show();
 		}
 		else if (pass == "") {
@@ -157,7 +157,7 @@ $('.circlebtn').click(function() {
 				type: 'warning',
 				theme: 'metroui',
 				layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-				timeout: 2000
+				timeout: 3000
 			}).show();
 		}
 		else if (ph.length != 10) {
@@ -166,7 +166,7 @@ $('.circlebtn').click(function() {
 				type: 'warning',
 				theme: 'metroui',
 				layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-				timeout: 2000
+				timeout: 3000
 			}).show();
 		}
 		else {
@@ -200,7 +200,7 @@ $('.circlebtn').click(function() {
 				type: 'warning',
 				theme: 'metroui',
 				layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-				timeout: 2000
+				timeout: 3000
 			}).show();
 			return;
 		}
