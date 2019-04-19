@@ -1,5 +1,6 @@
 /* global $ */
 /* global Swal */
+/* global Noty */
 var data;
 var itemsPerRow, itemsPerColumn;
 
@@ -52,18 +53,25 @@ $('.container').on('click', '.btn', function() {
 			card.find('.btn').addClass('animation_circle');
 			card.find('.profile').addClass('animation_card');
 
-			var pass;
-			for (var i = 0; i < data.length; i++) {
-				if (data[i].emailId == card.find('#emailId').text()) {
+			var id = card.find('#emailId').text(),
+				pass = "";
+			for (var i = 0; i < data.length; i++)
+				if (data[i].emailId == id)
 					pass = data[i].password;
-				}
-			}
+
 			const http = new XMLHttpRequest();
 			http.open('POST', '/delete');
 			http.setRequestHeader('Content-type', 'application/json');
 			http.onreadystatechange = function() {
 				if (http.readyState == XMLHttpRequest.DONE) {
 					if (http.responseText == 1) {
+						new Noty({
+							text: "Yayy! " + id + " Successfully Deleted!",
+							type: 'success',
+							theme: 'metroui',
+							layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
+							timeout: 1000
+						}).show();
 						del(card);
 					}
 					else if (http.responseText == 0) {
@@ -76,7 +84,7 @@ $('.container').on('click', '.btn', function() {
 				}
 			};
 			http.send(JSON.stringify({
-				email: card.find('#emailId').text(),
+				email: id,
 				pass: pass
 			}));
 		}
