@@ -44,7 +44,7 @@ $('.formset .btn').click(function() {
 		pass = $('.pass').val();
 	if (!validateEmail(id)) {
 		new Noty({
-			text: "This Email Doesn 't Look Right!",
+			text: "This email doesn't look right!",
 			type: 'warning',
 			theme: 'metroui',
 			layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
@@ -53,8 +53,8 @@ $('.formset .btn').click(function() {
 	}
 	else if (pass == "") {
 		new Noty({
-			text: 'You are not allowed in without a password!',
-			type: 'error',
+			text: 'Please enter a valid password!',
+			type: 'warning',
 			theme: 'metroui',
 			layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
 			timeout: 2000
@@ -84,19 +84,22 @@ $('.formset .btn').click(function() {
 					});
 				}
 				else if (http.responseText == 0) {
-					Swal.fire({
+					new Noty({
+						text: "Password you've entered is incorrect!",
 						type: 'error',
-						title: 'Alert!',
-						text: 'Incorrect password!'
-					});
+						theme: 'metroui',
+						layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
+						timeout: 5000
+					}).show();
 				}
 				else if (http.responseText == 2) {
-					// Swal.fire({
-					// 	type: 'error',
-					// 	title: 'Please Check Email!',
-					// 	text: "This Account Doesn't Exists!"
-					// });
-					console.log("Email Not Found");
+					new Noty({
+						text: "Account with this email doesn't exist!",
+						type: 'error',
+						theme: 'metroui',
+						layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
+						timeout: 5000
+					}).show();
 				}
 			}
 		};
