@@ -44,20 +44,20 @@ $('.formset .btn').click(function() {
 		pass = $('.pass').val();
 	if (!validateEmail(id)) {
 		new Noty({
-			text: "This email doesn't look right!",
+			text: "Ummm! This email doesn't sound correct! Please enter correct email address.",
 			type: 'warning',
 			theme: 'metroui',
 			layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-			timeout: 2000
+			timeout: 3000
 		}).show()
 	}
 	else if (pass == "") {
 		new Noty({
-			text: 'Please enter a valid password!',
+			text: 'Nobody is allowed in without a password! Please enter yours.',
 			type: 'warning',
 			theme: 'metroui',
 			layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-			timeout: 2000
+			timeout: 3000
 		}).show()
 	}
 	else {
@@ -68,7 +68,7 @@ $('.formset .btn').click(function() {
 			if (http.readyState == XMLHttpRequest.DONE) {
 				if (http.responseText == 1) {
 					new Noty({
-						text: "Yayy! You're successfully logged in;",
+						text: "Yayy! You're successfully logged in!",
 						type: 'success',
 						theme: 'metroui',
 						layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
@@ -86,7 +86,7 @@ $('.formset .btn').click(function() {
 				}
 				else if (http.responseText == 0) {
 					new Noty({
-						text: "Password you've entered is incorrect!",
+						text: "Oops! Password you've entered is incorrect!",
 						type: 'error',
 						theme: 'metroui',
 						layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
@@ -95,7 +95,7 @@ $('.formset .btn').click(function() {
 				}
 				else if (http.responseText == 2) {
 					new Noty({
-						text: "Account with this email doesn't exist!",
+						text: "Uh-Uh! Account with this email doesn't exist!",
 						type: 'error',
 						theme: 'metroui',
 						layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
@@ -133,43 +133,58 @@ $('.circlebtn').click(function() {
 		email = $('.b').val();
 		pass = $('.c').val();
 		ph = $('.d').val();
+
+		var proceed = true,
+			kill = true;
 		if (username == "") {
 			new Noty({
-				text: "This username doesn't sound cool!",
+				text: "Ummm! This username doesn't sound good!",
 				type: 'warning',
 				theme: 'metroui',
 				layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-				timeout: 3000
+				timeout: 3000,
+				killer: kill
 			}).show();
+			proceed = false;
+			if (kill) kill = false;
 		}
-		else if (!validateEmail(email)) {
+		if (!validateEmail(email)) {
 			new Noty({
-				text: "This email doesn't look right!",
+				text: "Ahem! This email doesn't look right!",
 				type: 'warning',
 				theme: 'metroui',
 				layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-				timeout: 3000
+				timeout: 3000,
+				killer: kill
 			}).show();
+			proceed = false;
+			if (kill) kill = false;
 		}
-		else if (pass == "") {
+		if (pass == "") {
 			new Noty({
-				text: 'Please enter a valid password!',
+				text: 'Aahh! Please enter a valid password!',
 				type: 'warning',
 				theme: 'metroui',
 				layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-				timeout: 3000
+				timeout: 3000,
+				killer: kill
 			}).show();
+			proceed = false;
+			if (kill) kill = false;
 		}
-		else if (ph.length != 10) {
+		if (ph.length != 10) {
 			new Noty({
-				text: 'Please enter your correct 10 digit phone number!',
+				text: "Ummm! Enter your correct phone number! Don't worry We care about your privacy.",
 				type: 'warning',
 				theme: 'metroui',
 				layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-				timeout: 3000
+				timeout: 3000,
+				killer: kill
 			}).show();
+			proceed = false;
+			if (kill) kill = false;
 		}
-		else {
+		if (proceed) {
 			signup = 1;
 
 			$(".a").attr("disabled", "disabled");
@@ -223,6 +238,13 @@ $('.circlebtn').click(function() {
 					$(".close").click();
 					$('.close').text("✓");
 					$(".close").off('click');
+					new Noty({
+						text: "Yayy! Successfully created your account!",
+						type: 'success',
+						theme: 'metroui',
+						layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
+						timeout: 1000
+					}).show();
 				}
 				else if (http.responseText == 2) {
 					Swal.fire({

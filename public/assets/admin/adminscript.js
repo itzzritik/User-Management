@@ -1,5 +1,6 @@
 /* global $ */
 /* global Swal */
+var data;
 var itemsPerRow, itemsPerColumn;
 
 $(window).resize(function() {
@@ -50,8 +51,34 @@ $('.container').on('click', '.btn', function() {
 			card.find('.circle_loader').addClass('animation');
 			card.find('.btn').addClass('animation_circle');
 			card.find('.profile').addClass('animation_card');
-			console.log(card.find('#emailId').text() + " Deleted Successfully");
-			del(card);
+
+			var pass;
+			for (var i = 0; i < data.length; i++) {
+				if (data[i].emailId == card.find('#emailId').text()) {
+					pass = data[i].password;
+				}
+			}
+			const http = new XMLHttpRequest();
+			http.open('POST', '/delete');
+			http.setRequestHeader('Content-type', 'application/json');
+			http.onreadystatechange = function() {
+				if (http.readyState == XMLHttpRequest.DONE) {
+					if (http.responseText == 1) {
+						del(card);
+					}
+					else if (http.responseText == 0) {
+						Swal.fire({
+							type: 'error',
+							title: 'Apologies!',
+							text: "Account Deletion Failed!"
+						});
+					}
+				}
+			};
+			http.send(JSON.stringify({
+				email: card.find('#emailId').text(),
+				pass: pass
+			}));
 		}
 	});
 });
@@ -82,7 +109,7 @@ const http = new XMLHttpRequest();
 http.open('POST', '/admin');
 http.setRequestHeader('Content-type', 'application/json');
 http.onload = function() {
-	const data = JSON.parse(http.responseText);
+	data = JSON.parse(http.responseText);
 	console.log(data);
 
 	function addCards(i, delay) {
