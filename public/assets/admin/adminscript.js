@@ -68,7 +68,7 @@ $('.container').on('click', '.btn', function() {
 							type: 'success',
 							theme: 'metroui',
 							layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-							timeout: 5000
+							timeout: 4000
 						}).show();
 						card.find('.btn').addClass('animation_circle');
 						card.find('.profile').addClass('animation_card');
@@ -80,7 +80,7 @@ $('.container').on('click', '.btn', function() {
 							type: 'error',
 							theme: 'metroui',
 							layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-							timeout: 5000
+							timeout: 4000
 						}).show();
 						card.find('.circle_loader').removeClass('animation');
 					}

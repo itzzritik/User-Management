@@ -180,7 +180,6 @@ app.get("/login", function(req, res) {
 });
 
 app.get("/table", function(req, res) {
-    console.log("\n" + ++call + ") Table Data Requested");
     sql.query("SELECT * from userData ", function(e, result) {
         if (e) {
             res.send("0");
