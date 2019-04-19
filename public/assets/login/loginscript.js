@@ -1,5 +1,6 @@
 /* global $ */
 /* global Swal */
+/* global Noty */
 
 $('.form-control').focusout(function() {
 	$('.form-group').removeClass('focus');
@@ -41,7 +42,25 @@ $('.close').click(function() {
 $('.formset .btn').click(function() {
 	var id = $('.id').val(),
 		pass = $('.pass').val();
-	if (id != "" && pass != "") {
+	if (!validateEmail(id)) {
+		new Noty({
+			text: "This Email Doesn 't Look Right!",
+			type: 'warning',
+			theme: 'metroui',
+			layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
+			timeout: 2000
+		}).show()
+	}
+	else if (pass == "") {
+		new Noty({
+			text: 'You are not allowed in without a password!',
+			type: 'error',
+			theme: 'metroui',
+			layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
+			timeout: 2000
+		}).show()
+	}
+	else {
 		const http = new XMLHttpRequest();
 		http.open('POST', '/login');
 		http.setRequestHeader('Content-type', 'application/json');
@@ -72,11 +91,12 @@ $('.formset .btn').click(function() {
 					});
 				}
 				else if (http.responseText == 2) {
-					Swal.fire({
-						type: 'error',
-						title: 'Please Check Email!',
-						text: "This Account Doesn't Exists!"
-					});
+					// Swal.fire({
+					// 	type: 'error',
+					// 	title: 'Please Check Email!',
+					// 	text: "This Account Doesn't Exists!"
+					// });
+					console.log("Email Not Found");
 				}
 			}
 		};
@@ -179,52 +199,3 @@ $('.circlebtn').click(function() {
 		}));
 	}
 });
-
-
-
-
-
-
-const m = 0.512286623256592433;
-
-function buildWave(w, h) {
-	const a = h / 4;
-	const y = h / 2;
-	const pathData = [
-		'M', w * 0, y + a / 2,
-		'c',
-		a * m, 0, -(1 - a) * m, -a,
-		a, -a,
-		's', -(1 - a) * m, a,
-		a, a,
-		's', -(1 - a) * m, -a,
-		a, -a,
-		's', -(1 - a) * m, a,
-		a, a,
-		's', -(1 - a) * m, -a,
-		a, -a,
-
-		's', -(1 - a) * m, a,
-		a, a,
-		's', -(1 - a) * m, -a,
-		a, -a,
-		's', -(1 - a) * m, a,
-		a, a,
-		's', -(1 - a) * m, -a,
-		a, -a,
-		's', -(1 - a) * m, a,
-		a, a,
-		's', -(1 - a) * m, -a,
-		a, -a,
-		's', -(1 - a) * m, a,
-		a, a,
-		's', -(1 - a) * m, -a,
-		a, -a,
-		's', -(1 - a) * m, a,
-		a, a,
-		's', -(1 - a) * m, -a,
-		a, -a
-	].join(' ');
-	document.querySelector('#wave').setAttribute('d', pathData);
-}
-buildWave(90, 60);

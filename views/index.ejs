@@ -2,8 +2,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<head>
 		<title>User Management</title>
-		<link rel="icon" href="/public/img/favicon.png" type="image/png" sizes="32x32">
+		<link href="/public/img/favicon.png" rel="icon" type="image/png" sizes="32x32">
 		<link href="/public/assets/login/loginstyle.css" rel="stylesheet" type="text/css">
+		<link href="//cdn.rawgit.com/needim/noty/77268c46/lib/noty.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<% if(login == 1) { %>
@@ -77,6 +78,7 @@
 	</body>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+	<script src="//cdn.rawgit.com/needim/noty/77268c46/lib/noty.min.js"></script>
 	<script src="/public/assets/login/loginscript.js"></script>
 	<% if(login == 0){ %>
 	<script>
@@ -123,6 +125,18 @@
 				}
 			});
 		});
+		
+		const m = 0.512286623256592433;
+		(function buildWave(w, h) {
+			const a = h / 4;
+			const y = h / 2;
+			const pathData = ['M', w * 0, y + a / 2, 'c', a * m, 0, -(1 - a) * m, -a, a, -a, 's', -(1 - a) * m, a, a, a, 's', -(1 - a) * m, -a,
+				a, -a, 's', -(1 - a) * m, a, a, a, 's', -(1 - a) * m, -a, a, -a, 's', -(1 - a) * m, a, a, a, 's', -(1 - a) * m, -a,
+				a, -a, 's', -(1 - a) * m, a, a, a, 's', -(1 - a) * m, -a, a, -a, 's', -(1 - a) * m, a, a, a, 's', -(1 - a) * m, -a,
+				a, -a, 's', -(1 - a) * m, a, a, a, 's', -(1 - a) * m, -a, a, -a, 's', -(1 - a) * m, a, a, a, 's', -(1 - a) * m, -a, a, -a
+			].join(' ');
+			$("#wave").attr('d', pathData);
+		})(80, 90);
 	</script>
 	<% } %>
 </html>
