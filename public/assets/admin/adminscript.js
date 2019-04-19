@@ -50,8 +50,6 @@ $('.container').on('click', '.btn', function() {
 		if (result.value) {
 			var card = $(this).parent().parent();
 			card.find('.circle_loader').addClass('animation');
-			card.find('.btn').addClass('animation_circle');
-			card.find('.profile').addClass('animation_card');
 
 			var id = card.find('#emailId').text(),
 				pass = "";
@@ -66,20 +64,25 @@ $('.container').on('click', '.btn', function() {
 				if (http.readyState == XMLHttpRequest.DONE) {
 					if (http.responseText == 1) {
 						new Noty({
-							text: "Yayy! " + id + " Successfully Deleted!",
+							text: "Yayy! Account Successfully Deleted!",
 							type: 'success',
 							theme: 'metroui',
 							layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-							timeout: 1000
+							timeout: 5000
 						}).show();
+						card.find('.btn').addClass('animation_circle');
+						card.find('.profile').addClass('animation_card');
 						del(card);
 					}
 					else if (http.responseText == 0) {
-						Swal.fire({
+						new Noty({
+							text: "Apologies! Account Deletion Failed!",
 							type: 'error',
-							title: 'Apologies!',
-							text: "Account Deletion Failed!"
-						});
+							theme: 'metroui',
+							layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
+							timeout: 5000
+						}).show();
+						card.find('.circle_loader').removeClass('animation');
 					}
 				}
 			};
