@@ -48,7 +48,7 @@ $('.formset .btn').click(function() {
 			type: 'warning',
 			theme: 'metroui',
 			layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-			timeout: 1500
+			timeout: 2000
 		}).show()
 	}
 	else if (pass == "") {
@@ -57,7 +57,7 @@ $('.formset .btn').click(function() {
 			type: 'warning',
 			theme: 'metroui',
 			layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-			timeout: 1500
+			timeout: 2000
 		}).show()
 	}
 	else {
@@ -133,7 +133,43 @@ $('.circlebtn').click(function() {
 		email = $('.b').val();
 		pass = $('.c').val();
 		ph = $('.d').val();
-		if (username != "" && validateEmail(email) && pass != "" && ph.length == 10) {
+		if (username == "") {
+			new Noty({
+				text: "This username doesn't sound cool!",
+				type: 'warning',
+				theme: 'metroui',
+				layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
+				timeout: 2000
+			}).show();
+		}
+		else if (validateEmail(email)) {
+			new Noty({
+				text: "This email doesn't look right!",
+				type: 'warning',
+				theme: 'metroui',
+				layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
+				timeout: 2000
+			}).show();
+		}
+		else if (pass == "") {
+			new Noty({
+				text: 'Please enter a valid password!',
+				type: 'warning',
+				theme: 'metroui',
+				layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
+				timeout: 2000
+			}).show();
+		}
+		else if (ph.length != 10) {
+			new Noty({
+				text: 'Please enter your correct 10 digit phone number!',
+				type: 'warning',
+				theme: 'metroui',
+				layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
+				timeout: 2000
+			}).show();
+		}
+		else {
 			signup = 1;
 
 			$(".a").attr("disabled", "disabled");
@@ -158,7 +194,16 @@ $('.circlebtn').click(function() {
 		}
 	}
 	else if (signup == 1) {
-		if ($('.c').val() != pass) return;
+		if ($('.c').val() != pass) {
+			new Noty({
+				text: "Password and Confirm Password does not match",
+				type: 'warning',
+				theme: 'metroui',
+				layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
+				timeout: 2000
+			}).show();
+			return;
+		}
 
 		const http = new XMLHttpRequest();
 		http.open('POST', '/signup');
