@@ -436,6 +436,35 @@ body {
     outline: none;
 }
 
+.profile .log {
+    position: absolute;
+    right: 40px;
+    top: 50px;
+    width: 40px;
+    height: 40px;
+    padding: 15px;
+    outline: none;
+    cursor: pointer;
+    transition: all .2s ease-in;
+}
+
+.profile .log:hover {
+    transform: rotate(360deg);
+}
+
+.profile .log:active {
+    transform: scale(1.4);
+}
+
+@keyframes logoutanim {
+    50% {
+        border-radius: 160px;
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+
 svg {
     margin: 0 auto;
     overflow: hidden;

@@ -28,6 +28,13 @@ var validate = $formControl.each(function() {
     }
 });
 
+$('.log').click(function() {
+    $('.center').css('animation', 'logoutanim 0.5s forwards cubic-bezier(0.86, 0, 0.07, 1)');
+    setTimeout(function() { $('.frame').css('animation', 'logoutanim 0.5s forwards cubic-bezier(0.86, 0, 0.07, 1)'); }, 200);
+    $(this).remove();
+    setTimeout(function() { window.location.replace("/login"); }, 500);
+});
+
 $('.close').click(function() {
     $(this).closest('.register-form').toggleClass('open');
 });

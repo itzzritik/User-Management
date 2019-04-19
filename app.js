@@ -205,7 +205,6 @@ app.get("/admin", function(req, res) {
     res.render("admin");
 });
 app.post("/admin", function(req, res) {
-    console.log("\n" + ++call + ") Table Data Requested in Admin Panel");
     sql.query("SELECT * from userData ", function(e, result) {
         if (e) {
             res.send("0");
