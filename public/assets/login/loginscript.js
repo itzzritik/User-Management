@@ -48,7 +48,7 @@ $('.formset .btn').click(function() {
 			type: 'warning',
 			theme: 'metroui',
 			layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-			timeout: 2000
+			timeout: 1500
 		}).show()
 	}
 	else if (pass == "") {
@@ -57,7 +57,7 @@ $('.formset .btn').click(function() {
 			type: 'warning',
 			theme: 'metroui',
 			layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-			timeout: 2000
+			timeout: 1500
 		}).show()
 	}
 	else {
@@ -67,13 +67,14 @@ $('.formset .btn').click(function() {
 		http.onreadystatechange = function() {
 			if (http.readyState == XMLHttpRequest.DONE) {
 				if (http.responseText == 1) {
-					Swal.fire({
+					new Noty({
+						text: "Yayy! You're successfully logged in;",
 						type: 'success',
-						title: 'Congratulations!',
-						text: "You are succesfully logged in!",
-						timer: 1500,
-						onBeforeOpen: () => Swal.showLoading()
-					}).then(() => {
+						theme: 'metroui',
+						layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
+						timeout: 1000
+					}).show();
+					setTimeout(function() {
 						var url = '/profile';
 						var form = $('<form action="' + url + '" method="post">' +
 							'<input type="hidden" name="email" value="' + id + '" />' +
@@ -81,7 +82,7 @@ $('.formset .btn').click(function() {
 							'</form>');
 						$('body').append(form);
 						form.submit();
-					});
+					}, 1000);
 				}
 				else if (http.responseText == 0) {
 					new Noty({
