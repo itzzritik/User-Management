@@ -121,7 +121,6 @@ http.open('POST', '/table');
 http.setRequestHeader('Content-type', 'application/json');
 http.onload = function() {
 	data = JSON.parse(http.responseText);
-	console.log(data);
 
 	function addCards(i, delay) {
 		setTimeout(function() {

@@ -329,10 +329,12 @@ $('.admin').click(function() {
 		}, 500);
 	}, 300);
 	setTimeout(function() {
-		$('body').css('background-image', 'none');
-		$('body').css('animation', 'bright 0.5s forwards cubic-bezier(0.86, 0, 0.07, 1)');
-		var form = $('<form action="/admin" method="post"></form>');
-		$('body').append(form);
-		form.submit();
+		$('body').css('animation', 'bright 0.5s forwards ease-in-out');
+		$('body').css('background-image', 'url("public/img/admin_back.svg")');
+		setTimeout(function() {
+			var form = $('<form action="/admin" method="post"></form>');
+			$('body').append(form);
+			form.submit();
+		}, 400);
 	}, 1300);
 });
