@@ -7,7 +7,7 @@
 
 ### Administrator
 + **Admin** after successful login gains access to the **Admin Dashboard**.
-+ **Admin Dashboard** contains a list of all user cards.
++ **Admin Dashboard** contains a list of all user in a card like representation.
 + **Every** user card represents:
   - *Avatar*
   - *Username*
@@ -23,3 +23,13 @@
   - View user's profile.
   - Edit user's profile.
   - End user's **membership** by deleting their **account**.
+
+## About This Application
+This **User Management** web application is deployed on Amazon Web Services EC2 Machine and uses mentioned technologies to serve the purpose.
+- NodeJS
+- ExpressJS
+- SQL Database
+- EJS View Engine
+- HTML
+- CSS
+- Javascript/JQuery
