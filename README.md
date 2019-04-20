@@ -36,7 +36,7 @@ This package provides complete **User Management** solution, packed inside a **f
 - CSS
 - Javascript
 ### Libraries Used:
-- JQuery v3.4.0 [Visit](https://jquery.com/ "JQuery v3.4.0")
-- Sweet Alerts v2.0 [Visit](https://sweetalert2.github.io/ "Sweet Alerts v2.0")
-- Noty v2.0 [Visit](https://ned.im/noty/v2/ "Noty v2.0")
+- [JQuery v3.4.0](https://jquery.com/)
+- [Sweet Alerts v2.0](https://sweetalert2.github.io/)
+- [Noty v2.0](https://ned.im/noty/v2/)
 
