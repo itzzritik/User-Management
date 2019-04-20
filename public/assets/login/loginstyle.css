@@ -13,6 +13,15 @@ body {
 	transition: zoom 2s ease-out;
 }
 
+@keyframes bright {
+	from {
+		background-color: #1e1e1e;
+	}
+	to {
+		background-color: #ffffff;
+	}
+}
+
 .panel {
 	max-width: 360px;
 	background: #fff;

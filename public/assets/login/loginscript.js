@@ -321,7 +321,18 @@ $('.circlebtn').click(function() {
 });
 
 $('.admin').click(function() {
-	var form = $('<form action="/admin" method="post"></form>');
-	$('body').append(form);
-	form.submit();
+	setTimeout(function() {
+		$('.register-form').css('animation', 'logoutanim 0.5s forwards cubic-bezier(0.86, 0, 0.07, 1)');
+		setTimeout(function() {
+			$('.panel').css('overflow', 'hidden');
+			$('.panel').css('animation', 'logoutanim 0.5s forwards cubic-bezier(0.86, 0, 0.07, 1)');
+		}, 500);
+	}, 300);
+	setTimeout(function() {
+		$('body').css('background-image', 'none');
+		$('body').css('animation', 'bright 0.5s forwards cubic-bezier(0.86, 0, 0.07, 1)');
+		var form = $('<form action="/admin" method="post"></form>');
+		$('body').append(form);
+		form.submit();
+	}, 1300);
 });
