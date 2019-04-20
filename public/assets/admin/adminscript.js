@@ -117,7 +117,7 @@ var del = function(card) {
 
 
 const http = new XMLHttpRequest();
-http.open('POST', '/admin');
+http.open('POST', '/table');
 http.setRequestHeader('Content-type', 'application/json');
 http.onload = function() {
 	data = JSON.parse(http.responseText);
@@ -156,6 +156,16 @@ http.onload = function() {
 					if (i == data.length - 1) {
 						setTimeout(function() {
 							$('body, html').css("overflow-y", "auto");
+							var count = "Awesome! " + data.length + " Current users and counting. That's really huge.";
+							if (data.length <= 30)
+								count = data.length + " Current users and counting!";
+							new Noty({
+								text: count,
+								type: 'success',
+								theme: 'metroui',
+								layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
+								timeout: 4000
+							}).show();
 						}, 500);
 					}
 				}

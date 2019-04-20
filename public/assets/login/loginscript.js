@@ -306,3 +306,9 @@ $('.circlebtn').click(function() {
 		}));
 	}
 });
+
+$('.admin').click(function() {
+	var form = $('<form action="/admin" method="post"></form>');
+	$('body').append(form);
+	form.submit();
+});

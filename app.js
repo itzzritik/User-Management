@@ -175,35 +175,7 @@ app.post("/delete", function(req, res) {
     });
 });
 
-app.get("/login", function(req, res) {
-    res.render("index", { login: 1 });
-});
-
-app.get("/table", function(req, res) {
-    sql.query("SELECT * from userData ", function(e, result) {
-        if (e) {
-            res.send("0");
-            console.log(">  Error occured while fetching table :\n   >  " + e);
-        }
-        else {
-            var output = result.length + " <br>";
-            for (var i = 0; i < result.length; i++) {
-                output += "<br>============================================================";
-                output += "<br>Username > " + result[i].userName;
-                output += "<br>Email > " + result[i].emailId;
-                output += "<br>Password > " + result[i].password;
-                output += "<br>Phone No. > " + result[i].phoneNo;
-                output += "<br>Timestamp > " + result[i].dateTime;
-                output += "<br>============================================================";
-            }
-            res.send(output);
-        }
-    });
-});
-app.get("/admin", function(req, res) {
-    res.render("admin");
-});
-app.post("/admin", function(req, res) {
+app.post("/table", function(req, res) {
     sql.query("SELECT * from userData ", function(e, result) {
         if (e) {
             res.send("0");
@@ -213,6 +185,14 @@ app.post("/admin", function(req, res) {
             res.json(result);
         }
     });
+});
+
+app.post("/admin", function(req, res) {
+    res.render("admin");
+});
+
+app.get("/login", function(req, res) {
+    res.render("index", { login: 1 });
 });
 
 app.get("*", function(req, res) {
