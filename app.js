@@ -176,7 +176,7 @@ app.post("/delete", function(req, res) {
 });
 
 app.post("/table", function(req, res) {
-    sql.query("SELECT * from userData ", function(e, result) {
+    sql.query("SELECT * from userData ORDER BY dateTime", function(e, result) {
         if (e) {
             res.send("0");
             console.log(">  Error occured while fetching table :\n   >  " + e);

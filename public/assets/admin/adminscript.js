@@ -133,6 +133,7 @@ http.onload = function() {
 				'<h3>' + data[i].userName + '</h3>' +
 				'<h6 id="emailId">' + data[i].emailId + '</h6>' +
 				'<h6>' + data[i].phoneNo + '</h6>' +
+				'<h6>' + data[i].dateTime + '</h6>' +
 				'</div>' +
 				'<div class="btn">' +
 				'<div class="circle_loader"></div>' +
