@@ -7,7 +7,7 @@
 
 ### Administrator
 + **Admin** after successful login gains access to the **Admin Dashboard**.
-+ **Admin Dashboard** contains a list of all user cards.
++ **Admin Dashboard** contains a list of all user in a card like representation.
 + **Every** user card represents:
   - *Avatar*
   - *Username*
@@ -23,3 +23,20 @@
   - View user's profile.
   - Edit user's profile.
   - End user's **membership** by deleting their **account**.
+
+## About This Application
+This package provides complete **User Management** solution, packed inside a **fully responsive web application**, posing exceptional user interface with smooth animations. This **web application** is served by a NodeJS Server deployed on **Amazon Web Services EC2 Machine** allocated with a public **IP address**.
+
+### Technologies used to serve the purpose:
+- NodeJS
+- ExpressJS
+- SQL Database
+- EJS View Engine
+- HTML
+- CSS
+- Javascript
+### Libraries Used:
+- [JQuery v3.4.0](https://jquery.com/)
+- [Sweet Alerts v2.0](https://sweetalert2.github.io/)
+- [Noty v2.0](https://ned.im/noty/v2/)
+
