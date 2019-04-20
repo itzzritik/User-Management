@@ -128,7 +128,6 @@ http.onload = function() {
 			var element =
 				'<div class="element">' +
 				'<div class="profile">' +
-				'<div class="photo"><img src="https://avatars.dicebear.com/v2/avataaars/' + data[i].emailId + '.svg" /></div>' +
 				'<div class="content">' +
 				'<div class="text">' +
 				'<h3>' + data[i].userName + '</h3>' +
@@ -138,11 +137,16 @@ http.onload = function() {
 				'<div class="btn">' +
 				'<div class="circle_loader"></div>' +
 				'<img src="/public/img/del.svg" />' +
-				'</div></div></div></div>';
+				'</div></div>' +
+				'<div class="photo"><img src="https://avatars.dicebear.com/v2/avataaars/' + data[i].emailId + '.svg" /></div>' +
+				'</div></div>';
 			$('.container').append(element);
 			if (++i < data.length) {
 				if (i < itemsPerColumn * itemsPerRow) {
-					addCards(i, 100);
+					if (i % itemsPerRow)
+						addCards(i, 0);
+					else
+						addCards(i, 250);
 				}
 				else if (i == itemsPerColumn * itemsPerRow) {
 					addCards(i, 500);

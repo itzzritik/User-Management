@@ -10,7 +10,8 @@ function layout() {
 	var zoomlvl = 1;
 	if ($(window).width() < 480)
 		zoomlvl = $(window).width() / 480;
-	$('body').css({ zoom: zoomlvl, '-moz-transform': 'scale(' + zoomlvl + ')' });
+	if (parseFloat($("body").css("zoom")).toFixed(4) != zoomlvl.toFixed(4))
+		$('body').css({ zoom: zoomlvl, '-moz-transform': 'scale(' + zoomlvl + ')' });
 }
 layout();
 
@@ -199,9 +200,9 @@ $('.circlebtn').click(function() {
 		if (proceed) {
 			signup = 1;
 
-			$(".a").attr("disabled", "disabled");
-			$(".b").attr("disabled", "disabled");
-			$(".d").attr("disabled", "disabled");
+			$(".a").prop("disabled", true);
+			$(".b").prop("disabled", true);
+			$(".d").prop("disabled", true);
 			$('.c').val("");
 			$('.c').focus();
 
@@ -221,9 +222,21 @@ $('.circlebtn').click(function() {
 		}
 	}
 	else if (signup == 1) {
+		email = $('.b').val();
+
 		if ($('.c').val() != pass) {
 			new Noty({
 				text: "Password and Confirm Password does not match",
+				type: 'warning',
+				theme: 'metroui',
+				layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
+				timeout: 3000
+			}).show();
+			return;
+		}
+		if (!validateEmail(email)) {
+			new Noty({
+				text: "Ahem! This email doesn't look right!",
 				type: 'warning',
 				theme: 'metroui',
 				layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
@@ -255,22 +268,33 @@ $('.circlebtn').click(function() {
 						type: 'success',
 						theme: 'metroui',
 						layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-						timeout: 1000
+						timeout: 4000
 					}).show();
 				}
 				else if (http.responseText == 2) {
-					Swal.fire({
+					new Noty({
+						text: "Oops! Account with same email already exists! Try logging in or use a different email.",
 						type: 'error',
-						title: 'Error!',
-						text: "A User With Same Email ID Already Exists!"
-					}).then(() => { window.location.replace("/login"); });
+						theme: 'metroui',
+						layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
+						timeout: 4000
+					}).show();
+
+					$(".c").prop("disabled", true);
+					$('.register-form h2').text("NEW EMAIL ADDRESS");
+					$(".b").prop("disabled", false);
+					$('.b').val("");
+					$('.b').focus();
 				}
 				else {
-					Swal.fire({
+					new Noty({
+						text: "Apologies! Error occured while creating this account!",
 						type: 'error',
-						title: 'Error!',
-						text: "Error While Creating This Account!"
-					}).then(() => { window.location.replace("/login"); });
+						theme: 'metroui',
+						layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
+						timeout: 3000
+					}).show();
+					//setTimeout(function() { window.location.replace("/login"); }, 1000);
 				}
 			}
 		};
