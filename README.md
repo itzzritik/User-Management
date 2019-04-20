@@ -25,7 +25,9 @@
   - End user's **membership** by deleting their **account**.
 
 ## About This Application
-This **User Management** web application is deployed on Amazon Web Services EC2 Machine and uses mentioned technologies to serve the purpose.
+This package provides complete **User Management** solution, packed inside a fully responsive web application, posing exceptional user interface with smooth animations. This web application is served by a NodeJS Server deployed on Amazon Web Services EC2 Machine allocated with a public IP address.
+
+### Technologies used to serve the purpose:
 - NodeJS
 - ExpressJS
 - SQL Database
