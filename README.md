@@ -25,7 +25,7 @@
   - End user's **membership** by deleting their **account**.
 
 ## About This Application
-This package provides complete **User Management** solution, packed inside a fully responsive web application, posing exceptional user interface with smooth animations. This web application is served by a NodeJS Server deployed on Amazon Web Services EC2 Machine allocated with a public IP address.
+This package provides complete **User Management** solution, packed inside a **fully responsive web application**, posing exceptional user interface with smooth animations. This **web application** is served by a NodeJS Server deployed on **Amazon Web Services EC2 Machine** allocated with a public **IP address**.
 
 ### Technologies used to serve the purpose:
 - NodeJS
@@ -34,4 +34,9 @@ This package provides complete **User Management** solution, packed inside a ful
 - EJS View Engine
 - HTML
 - CSS
-- Javascript/JQuery
+- Javascript
+### Libraries Used:
+- JQuery v3.4.0 [Visit](https://jquery.com/ "JQuery v3.4.0")
+- Sweet Alerts v2.0 [Visit](https://sweetalert2.github.io/ "Sweet Alerts v2.0")
+- Noty v2.0 [Visit](https://ned.im/noty/v2/ "Noty v2.0")
+
