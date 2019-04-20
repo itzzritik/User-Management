@@ -64,7 +64,7 @@ $('.container').on('click', '.btn', function() {
 				if (http.readyState == XMLHttpRequest.DONE) {
 					if (http.responseText == 1) {
 						new Noty({
-							text: "Yayy! Account Deletion Successfull!",
+							text: "Poof! This Account Has Been Deleted!",
 							type: 'success',
 							theme: 'metroui',
 							layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',

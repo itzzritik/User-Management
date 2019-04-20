@@ -5,6 +5,10 @@
 $(window).resize(function() {
 	layout();
 });
+var loader = $('<img />')
+	.attr('src', "public/img/refresh.svg")
+	.width('25px').height('25px')
+	.addClass('refresh');
 
 function layout() {
 	var zoomlvl = 1;
@@ -227,11 +231,6 @@ $('.circlebtn').click(function() {
 				"background": "#FFF"
 			});
 			$('.close').css('display', 'none');
-			$('.close').click(function() {
-				$('.panel').css('overflow', 'hidden');
-				$('.panel').css('animation', 'logoutanim 0.5s forwards cubic-bezier(0.86, 0, 0.07, 1)');
-				setTimeout(function() { window.location.replace("/login"); }, 500);
-			});
 		}
 	}
 	else if (signup == 1) {
@@ -273,9 +272,9 @@ $('.circlebtn').click(function() {
 						"right": "15px"
 					});
 					$('.register-form').css('background', '#4BB543');
-					$(".close").click();
+					$('.close').click();
 					$('.close').text("✓");
-					$(".close").off('click');
+					$('.close').off('click');
 					new Noty({
 						text: "Yayy! Successfully created your account!",
 						type: 'success',
@@ -307,7 +306,16 @@ $('.circlebtn').click(function() {
 						layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
 						timeout: 3000
 					}).show();
-					$('.close').css('display', 'block');
+
+					$('.circlebtn').empty();
+					$('.circlebtn').removeClass("circlehover");
+					loader.appendTo($('.circlebtn'));
+
+					$('.circlebtn').click(function() {
+						$('.panel').css('overflow', 'hidden');
+						$('.panel').css('animation', 'logoutanim 0.5s forwards cubic-bezier(0.86, 0, 0.07, 1)');
+						setTimeout(function() { window.location.replace("/login"); }, 500);
+					});
 				}
 			}
 		};

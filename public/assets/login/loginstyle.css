@@ -5,6 +5,8 @@
 	box-sizing: border-box;
 	transition: 0.3s;
 	font-family: "Quicksand";
+	outline: none;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
 body {
@@ -104,10 +106,24 @@ body {
 	margin: auto;
 }
 
-.circlebtn:hover {
+.circlehover:hover {
 	color: #fff;
 	border-color: #fff;
 	box-shadow: 0 -100px 0 0 #ED2553 inset;
+}
+
+.refresh {
+	margin-left: -1px;
+	animation: spin 2s linear infinite;
+	transition: transform 0.5s ease-in-out;
+}
+
+
+@keyframes spin {
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
 }
 
 .circlebtn:hover>svg {
