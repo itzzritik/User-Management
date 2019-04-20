@@ -6,7 +6,7 @@
 **Organization users** can be assigned one of two roles: **Admin** or **Member**. An organization can have any number of each role, but must have at least one **admin user**. In addition to their member role in the **organization**, **members** can be assigned app permissions on specific **apps** owned by the organization.
 
 ### Admin
-+ **Admin** has access to **Admin Dashboard**.
++ **Admin** after successful login gains access to **Admin Dashboard**.
 + **Admin Dashboard** contains a list of all users.
 + **Every** user card represents:
   - *Avatar*
@@ -17,5 +17,6 @@
 + **Admin** can remove **member access** of user by deleting their **account**.
 + **Admin** can see total **number of users** having a valid **member access**.
 
-### Member
+### Member or User
++ **Members** after successful login gains access to **User Dashboard**.
 + 
