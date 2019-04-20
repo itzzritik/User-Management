@@ -52,7 +52,7 @@ $('.close').click(function() {
 	$(this).closest('.register-form').toggleClass('open');
 });
 
-$('.formset .btn').click(function() {
+$('.formset .login').click(function() {
 	var id = $('.id').val(),
 		pass = $('.pass').val();
 	if (!validateEmail(id)) {
@@ -88,6 +88,13 @@ $('.formset .btn').click(function() {
 						timeout: 1000
 					}).show();
 					setTimeout(function() {
+						$('.register-form').css('animation', 'logoutanim 0.5s forwards cubic-bezier(0.86, 0, 0.07, 1)');
+						setTimeout(function() {
+							$('.panel').css('overflow', 'hidden');
+							$('.panel').css('animation', 'logoutanim 0.5s forwards cubic-bezier(0.86, 0, 0.07, 1)');
+						}, 500);
+					}, 1000);
+					setTimeout(function() {
 						var url = '/profile';
 						var form = $('<form action="' + url + '" method="post">' +
 							'<input type="hidden" name="email" value="' + id + '" />' +
@@ -95,7 +102,7 @@ $('.formset .btn').click(function() {
 							'</form>');
 						$('body').append(form);
 						form.submit();
-					}, 1000);
+					}, 2000);
 				}
 				else if (http.responseText == 0) {
 					new Noty({
@@ -212,13 +219,19 @@ $('.circlebtn').click(function() {
 			$('.dd').text("Phone Number");
 
 			$('.register-form h2').text("CONFIRM PASSWORD");
-			$('.close').css('display', 'none');
 			$('.register-form h2').css('color', '#ED2553');
+			$('.register-form .form-group .form-label, .register-form .form-group .form-control').css('color', '#ED2553');
+
 			$('.register-form').css({
 				"color": "#ED2553",
 				"background": "#FFF"
 			});
-			$('.register-form .form-group .form-label, .register-form .form-group .form-control').css('color', '#ED2553');
+			$('.close').css('display', 'none');
+			$('.close').click(function() {
+				$('.panel').css('overflow', 'hidden');
+				$('.panel').css('animation', 'logoutanim 0.5s forwards cubic-bezier(0.86, 0, 0.07, 1)');
+				setTimeout(function() { window.location.replace("/login"); }, 500);
+			});
 		}
 	}
 	else if (signup == 1) {
@@ -294,7 +307,7 @@ $('.circlebtn').click(function() {
 						layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
 						timeout: 3000
 					}).show();
-					//setTimeout(function() { window.location.replace("/login"); }, 1000);
+					$('.close').css('display', 'block');
 				}
 			}
 		};

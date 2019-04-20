@@ -104,6 +104,18 @@ body {
 	filter: brightness(0) invert(1);
 }
 
+.admin {
+	width: 150px;
+	height: 30px;
+	font-size: 0.8rem;
+	padding: 0;
+}
+
+.admin:hover {
+	color: #fff;
+	border-color: #fff;
+	box-shadow: 0 -100px 0 0 #9b66b7 inset;
+}
 
 .register-form {
 	color: #fff;

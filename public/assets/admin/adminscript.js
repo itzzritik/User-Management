@@ -107,7 +107,7 @@ var del = function(card) {
 			card.find(".photo").css("animation", "popout-btn 0.3s both ease-in-out 0.5s");
 		}, 460);
 		setTimeout(function() {
-			card.parent().css("animation", "hide-card 0.3s both ease-in-out 0.5s");
+			card.parent().css("transform:", "hide-card 0.3s both ease-in-out 0.5s");
 		}, 800);
 		setTimeout(function() {
 			card.parent().remove();
@@ -161,10 +161,9 @@ http.onload = function() {
 								count = data.length + " Current users and counting!";
 							new Noty({
 								text: count,
-								type: 'success',
+								type: 'info',
 								theme: 'metroui',
-								layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight',
-								timeout: 4000
+								layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight'
 							}).show();
 						}, 500);
 					}
