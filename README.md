@@ -9,11 +9,11 @@
 + **Admin** has access to **Admin Dashboard**.
 + **Admin Dashboard** contains a list of all users.
 + **Every** user card represents:
-  - Avatar
-  - Username
-  - Email Address
-  - Phone Number
-  - Timestamp of user creation
+  - *Avatar*
+  - *Username*
+  - *Email Address*
+  - *Phone Number*
+  - *Timestamp of user creation*
 + **Admin** can remove **member access** of user by deleting their **account**.
 + **Admin** can see total **number of users** having a valid **member access**.
 
