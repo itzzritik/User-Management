@@ -19,7 +19,7 @@
 
 ### Member
 + **Members** after successful login gains access to **User Dashboard**.
-+ Features provided in **User Dashboard**:
++ **Features** provided in **User Dashboard**:
   - View user's profile.
   - Edit user's profile.
   - End user's **membership** by deleting their **account**.
