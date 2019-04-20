@@ -2,6 +2,18 @@
 /* global Swal */
 /* global Noty */
 
+$(window).resize(function() {
+	layout();
+});
+
+function layout() {
+	var zoomlvl = 1;
+	if ($(window).width() < 480)
+		zoomlvl = $(window).width() / 480;
+	$('body').css({ zoom: zoomlvl, '-moz-transform': 'scale(' + zoomlvl + ')' });
+}
+layout();
+
 $('.form-control').focusout(function() {
 	$('.form-group').removeClass('focus');
 });
