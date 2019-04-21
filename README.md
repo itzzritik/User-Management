@@ -54,20 +54,20 @@ This package provides complete **User Management** solution, packed inside a **f
 
 ## API Endpoints
 
-### GET */git*
+### GET /git
 - **git.add('.')** : Adds all files to the commit stack   (*Except .gitignore files*).
 - **git.commit(msg)** : Commits the changes with a message   (*-m = msg*).
 - **git.push('master', 'master')** : Pushes all local commits to github   (*remote, branch[options]*).
 
-### GET */login*
-- **Renders** the ejs file in views directory (*index.ejs*).
+### GET /login
+- **Renders** the ejs file in views directory (*index.ejs with **login code = 0***).
 - **Sends** rendered data to the browser.
 
-### GET */**
+### GET /*
 - **Redirects** all undefined **Get routes** to the **Get /login**.
 
-### POST */login*
-- **Saves** the **Email** and **Password** from the body of request to variables.
+### POST /login
+- **Saves** the **Email** and **Password** from the body of request to **variables**.
 - **Request** the SQL Database to return the **Password** of the requested **Email Address**.
 ```
 SELECT password from userData WHERE emailId = "email@domain.com"
@@ -82,5 +82,10 @@ SELECT password from userData WHERE emailId = "email@domain.com"
 > **User** is notified at the front end about **Login Successful**.
 > **POST /profile** is called at the frontend.
 
-### POST */profile*
-
+### POST /profile
+- **Saves** the **Email** and **Password** from the body of request to **variables**.
+- **Request** the SQL Database to return the **The User Data** of the requested **Email Address**.
+```
+SELECT * from userData WHERE emailId = "email@domain.com"
+```
+- **Renders** the ejs file in views directory (*index.ejs with **login code = 1** and **The User Data***).
