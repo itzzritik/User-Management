@@ -70,7 +70,7 @@ This package provides complete **User Management** solution, packed inside a **f
 - **Saves** the **Email** and **Password** from the body of request to **variables**.
 - **Request** the SQL Database to return the **Password** of the requested **Email Address**.
 ```
-SELECT password from userData WHERE emailId = "email@domain.com"
+SELECT password FROM userData WHERE emailId = "email@domain.com"
 ```
 - If the **returned array** is of zero size, it means **no account** with that Email Exists.
 > **User** is notified at the front end about **No such account**.
@@ -79,13 +79,38 @@ SELECT password from userData WHERE emailId = "email@domain.com"
 > **User** is notified at the front end about **Incorrect Password**.
 
 - If the **returned array** is valid, and password matches the **given password**.
-> **User** is notified at the front end about **Login Successful**.
+> **User** is notified at the front end about **Login Successful**.  
 > **POST /profile** is called at the frontend.
 
 ### POST /profile
 - **Saves** the **Email** and **Password** from the body of request to **variables**.
 - **Request** the SQL Database to return the **The User Data** of the requested **Email Address**.
 ```
-SELECT * from userData WHERE emailId = "email@domain.com"
+SELECT * FROM userData WHERE emailId = "email@domain.com"
 ```
 - **Renders** the ejs file in views directory (*index.ejs with **login code = 1** and **The User Data***).
+
+### POST /signup
+- **Saves** the **Data** from the body of request to **variables**.
+```
+**userName** = req.body.username;
+**emailId** = req.body.email;
+**password** = req.body.pass;
+**phoneNo** = req.body.ph;
+**dateTime** = new Date();     //Returns the current TimeStamp
+```
+
+### POST /delete
+- **Saves** the **Email** and **Password** from the body of request to **variables**.
+- **Request** the SQL Database to return the **Password** of the requested **Email Address**.
+```
+SELECT password FROM userData WHERE emailId = "email@domain.com"
+```
+- If the **returned array** is valid, and password matches the **given password**.
+- **Request** the SQL Database to delete the **The User Data** of the requested **Email Address**.
+```
+DELETE FROM userData WHERE emailId = "email@domain.com"
+```
+- After **Successful Deletion** of Account or Some **Error Occured**.
+> **User** is notified at the front end.
+
