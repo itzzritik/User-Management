@@ -132,3 +132,7 @@ DELETE FROM userData WHERE emailId = "email@domain.com"
 - **Renders** the ejs file in views directory (*admin.ejs*).
 - **Sends** rendered data to the browser.
 ---
+
+
+## Screenshots
+<img src="Screenshots/login.png" width="100%">
