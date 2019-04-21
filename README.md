@@ -27,20 +27,6 @@
 ## About This Application
 This package provides complete **User Management** solution, packed inside a **fully responsive web application**, posing exceptional user interface with smooth animations. This **web application** is served by a NodeJS Server deployed on **Amazon Web Services EC2 Machine** allocated with a public **IP address**.
 
-### Technologies used to serve the purpose:
-- NodeJS
-- ExpressJS
-- SQL Database
-- EJS View Engine
-- HTML
-- CSS
-- Javascript
-### Libraries Used:
-- [JQuery v3.4.0](https://jquery.com/)
-- [Sweet Alerts v2.0](https://sweetalert2.github.io/)
-- [Noty v2.0](https://ned.im/noty/v2/)
-- [Dicebear Avatars](https://avatars.dicebear.com/)
-
 ## Features
 - **User Dashboard** for members to manage their **account**.
 - **Admin Dashboard** for admininstrators to manage all **user accounts** at once.
@@ -49,3 +35,40 @@ This package provides complete **User Management** solution, packed inside a **f
 - **Validation** at every step.
 - **Notifications** at every **success** step.
 - **Error detection** and **handling** at every step.
+
+### Technologies used to serve the purpose:
+- NodeJS
+- ExpressJS
+- SQL Database
+- EJS View Engine
+- HTML
+- CSS
+- Javascript
+
+### Libraries Used:
+- [JQuery v3.4.0](https://jquery.com/)
+- [Sweet Alerts v2.0](https://sweetalert2.github.io/)
+- [Noty v2.0](https://ned.im/noty/v2/)
+- [Dicebear Avatars](https://avatars.dicebear.com/)
+- [Simple Git](https://www.npmjs.com/package/simple-git/)
+
+## API Routes
+
+### Get Routes
+
+#### /git
+- **git.add('.')** : Adds all files to the commit stack (*Except .gitignore files*).
+- **git.commit(m)** : Commits the changes with a message (*m*).
+- **git.push('master', 'master')** : Pushes all local commits to github (*remote, branch[options]*).
+
+#### /login
+- **Renders** the ejs file in views directory (*login.ejs*).
+- **Sends** rendered data to the browser.
+
+#### /*
+- **Redirects** all undefined **Get routes** to the **Get /login**.
+
+### Post Routes
+
+
+
