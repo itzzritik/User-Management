@@ -9,7 +9,7 @@
 + **Admin** after successful login, gains access to the **Admin Dashboard**.
 + **Admin Dashboard** contains a list of all user in a card like representation.
 + **Every** user card represents:
-  - *Dyncamic Avatar*
+  - *Dynamic Avatar*
   - *Username*
   - *Email Address*
   - *Phone Number*
