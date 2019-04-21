@@ -109,7 +109,7 @@ SELECT password FROM userData WHERE emailId = "email@domain.com"
 > **User** is notified at the front end about **An account with same email already exist**.  
 - If the **returned array** is empty, SQL Database is requested to insert new **set of values** in the table **userData**.
 ```
-INSERT INTO userData SET ?", userdata
+"INSERT INTO userData SET ?", userdata
 ```
 - After **Successful Insertion** of account or on some **Error**.
 > **User** is notified at the front end.
