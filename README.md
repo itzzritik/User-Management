@@ -29,7 +29,7 @@ This package provides complete **User Management** solution, packed inside a **f
 
 ## Features
 - **User Dashboard** for members to manage their **account**.
-- **Admin Dashboard** for admininstrators to manage all **user accounts** at once.
+- **Admin Dashboard** for administrators to manage all **user accounts** at once.
 - **Exceptional user interface** to keep you **enchanted** while browsing through panel.
 - **Smooth animations** at every step.
 - **Validation** at every step.
