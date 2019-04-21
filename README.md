@@ -54,21 +54,32 @@ This package provides complete **User Management** solution, packed inside a **f
 
 ## API Routes
 
-### Get Routes
+### Get /git
+- **git.add('.')** : Adds all files to the commit stack   (*Except .gitignore files*).
+- **git.commit(msg)** : Commits the changes with a message   (*-m = msg*).
+- **git.push('master', 'master')** : Pushes all local commits to github   (*remote, branch[options]*).
 
-#### /git
-- **git.add('.')** : Adds all files to the commit stack (*Except .gitignore files*).
-- **git.commit(m)** : Commits the changes with a message (*m*).
-- **git.push('master', 'master')** : Pushes all local commits to github (*remote, branch[options]*).
-
-#### /login
-- **Renders** the ejs file in views directory (*login.ejs*).
+### Get /login
+- **Renders** the ejs file in views directory (*index.ejs*).
 - **Sends** rendered data to the browser.
 
-#### /*
+### Get /*
 - **Redirects** all undefined **Get routes** to the **Get /login**.
 
-### Post Routes
+### Post /login
+- **Saves** the **Email** and **Password** from the body of request to variables.
+- **Request** the SQL Database to return the **Password** of the requested **Email Address**.
+```
+SELECT password from userData WHERE emailId = "email@domain.com"
+```
+- If the **returned array** is of zero size, it means **no account** with that Email Exists.
+> **User** is notified at the front end about **No such account**.
 
+- If the **returned array** is valid, and password doesn't matches the **given password**.
+> **User** is notified at the front end about **Incorrect Password**.
+
+- If the **returned array** is valid, and password matches the **given password**.
+> **User** is notified at the front end about **Login Successful**.
+> **POST /profile** is called at the frontend.
 
 
