@@ -72,7 +72,7 @@ This package provides complete **User Management** solution, packed inside a **f
 ```
 SELECT password FROM userData WHERE emailId = "email@domain.com"
 ```
-- If the **returned array** is of zero size, it means **no account** with that Email Exists.
+- If the **returned array** is empty, it means **no account** with that Email Exists.
 > **User** is notified at the front end about **No such account**.
 
 - If the **returned array** is valid, and password doesn't matches the **given password**.
@@ -93,12 +93,26 @@ SELECT * FROM userData WHERE emailId = "email@domain.com"
 ### POST /signup
 - **Saves** the **Data** from the body of request to **variables**.
 ```
-**userName** = req.body.username;
-**emailId** = req.body.email;
-**password** = req.body.pass;
-**phoneNo** = req.body.ph;
-**dateTime** = new Date();     //Returns the current TimeStamp
+var userdata = {
+        userName: req.body.username,
+        emailId: req.body.email,
+        password: req.body.pass,
+        phoneNo: req.body.ph,
+        dateTime: new Date()            //Returns the current TimeStamp
+    };     
 ```
+- **Request** the SQL Database to return the **Password** of the requested **Email Address**.
+```
+SELECT password FROM userData WHERE emailId = "email@domain.com"
+```
+- If the **returned array** is valid.
+> **User** is notified at the front end about **An account with same email already exist**.  
+- If the **returned array** is empty, SQL Database is requested to insert new **set of values** in the table **userData**.
+```
+INSERT INTO userData SET ?", userdata
+```
+- After **Successful Insertion** of account or on some **Error**.
+> **User** is notified at the front end.
 
 ### POST /delete
 - **Saves** the **Email** and **Password** from the body of request to **variables**.
@@ -111,6 +125,6 @@ SELECT password FROM userData WHERE emailId = "email@domain.com"
 ```
 DELETE FROM userData WHERE emailId = "email@domain.com"
 ```
-- After **Successful Deletion** of Account or Some **Error Occured**.
+- After **Successful Deletion** of account or on some **Error**.
 > **User** is notified at the front end.
 
