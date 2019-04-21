@@ -135,4 +135,12 @@ DELETE FROM userData WHERE emailId = "email@domain.com"
 
 
 ## Screenshots
+### Login Page
 <img src="Screenshots/login.png" width="100%">
+---
+### Profile Page
+<img src="Screenshots/profile.png" width="100%">
+---
+### Admin Panel
+<img src="Screenshots/admin.png" width="100%">
+---
