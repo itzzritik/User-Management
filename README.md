@@ -40,3 +40,11 @@ This package provides complete **User Management** solution, packed inside a **f
 - [Sweet Alerts v2.0](https://sweetalert2.github.io/)
 - [Noty v2.0](https://ned.im/noty/v2/)
 
+## Features
+- **User Dashboard** for members to manage their **account**.
+- **Admin Dashboard** for admininstrators to manage all **user accounts** at once.
+- **Exceptional user interface** to keep you **enchanted** while browsing through panel.
+- **Smooth animations** at every step.
+- **Validation** at every step.
+- **Notifications** at every **success** step.
+- **Error detection** and **handling** at every step.
