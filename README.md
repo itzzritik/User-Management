@@ -52,21 +52,21 @@ This package provides complete **User Management** solution, packed inside a **f
 - [Dicebear Avatars](https://avatars.dicebear.com/)
 - [Simple Git](https://www.npmjs.com/package/simple-git/)
 
-## API Routes
+## API Endpoints
 
-### Get /git
+### GET */git*
 - **git.add('.')** : Adds all files to the commit stack   (*Except .gitignore files*).
 - **git.commit(msg)** : Commits the changes with a message   (*-m = msg*).
 - **git.push('master', 'master')** : Pushes all local commits to github   (*remote, branch[options]*).
 
-### Get /login
+### GET */login*
 - **Renders** the ejs file in views directory (*index.ejs*).
 - **Sends** rendered data to the browser.
 
-### Get /*
+### GET */**
 - **Redirects** all undefined **Get routes** to the **Get /login**.
 
-### Post /login
+### POST */login*
 - **Saves** the **Email** and **Password** from the body of request to variables.
 - **Request** the SQL Database to return the **Password** of the requested **Email Address**.
 ```
@@ -82,4 +82,5 @@ SELECT password from userData WHERE emailId = "email@domain.com"
 > **User** is notified at the front end about **Login Successful**.
 > **POST /profile** is called at the frontend.
 
+### POST */profile*
 
