@@ -79,8 +79,8 @@ SELECT password FROM userData WHERE emailId = "email@domain.com"
 > **User** is notified at the front end about **Incorrect Password**.
 
 - If the **returned array** is valid, and password matches the **given password**.
-> **User** is notified at the front end about **Login Successful**.  
-> **POST /profile** is called at the frontend.
+> - **User** is notified at the front end about **Login Successful**.  
+> - **POST /profile** is called at the frontend.
 
 ### POST /profile
 - **Saves** the **Email** and **Password** from the body of request to **variables**.
