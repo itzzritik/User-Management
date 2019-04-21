@@ -70,7 +70,7 @@ app.post("/login", function(req, res) {
     var email = req.body.email,
         pass = req.body.pass;
     console.log("\n" + ++call + ") Authentication Started\n   >  Email: " + email);
-    sql.query("SELECT password from userData WHERE emailId = \"" + email + "\"", function(e, result) {
+    sql.query("SELECT password FROM userData WHERE emailId = \"" + email + "\"", function(e, result) {
         if (e) {
             res.send("0");
             console.log(">  Error occured while logging in :\n   >  " + e);
@@ -100,7 +100,7 @@ app.post("/signup", function(req, res) {
         dateTime: new Date()
     };
     console.log("\n" + ++call + ") User Creation Started");
-    sql.query("SELECT password from userData WHERE emailId = \"" + userdata.emailId + "\"", function(e, result) {
+    sql.query("SELECT password FROM userData WHERE emailId = \"" + userdata.emailId + "\"", function(e, result) {
         if (e) {
             res.send("0");
             console.log(">  Error occured while logging in :\n   >  " + e);
@@ -130,7 +130,7 @@ app.post("/profile", function(req, res) {
     var email = req.body.email,
         pass = req.body.pass;
     console.log("\n" + ++call + ") Profile Details Requested\n   >  Email: " + email);
-    sql.query("SELECT * from userData WHERE emailId = \"" + email + "\"", function(e, result) {
+    sql.query("SELECT * FROM userData WHERE emailId = \"" + email + "\"", function(e, result) {
         if (e) {
             res.send("0");
             console.log(">  Error occured while fetching profile :\n   >  " + e);
@@ -151,7 +151,7 @@ app.post("/delete", function(req, res) {
     var email = req.body.email,
         pass = req.body.pass;
     console.log("\n" + ++call + ") Delete Account Requested\n   >  Email: " + email);
-    sql.query("SELECT password from userData WHERE emailId = \"" + email + "\"", function(e, result) {
+    sql.query("SELECT password FROM userData WHERE emailId = \"" + email + "\"", function(e, result) {
         if (e) {
             res.send("0");
             console.log(">  Error occured while logging in :\n   >  " + e);
@@ -176,7 +176,7 @@ app.post("/delete", function(req, res) {
 });
 
 app.post("/table", function(req, res) {
-    sql.query("SELECT * from userData ORDER BY dateTime", function(e, result) {
+    sql.query("SELECT * FROM userData ORDER BY dateTime", function(e, result) {
         if (e) {
             res.send("0");
             console.log(">  Error occured while fetching table :\n   >  " + e);
