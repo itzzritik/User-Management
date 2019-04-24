@@ -3,6 +3,7 @@ const app = express();
 const bodyparser = require("body-parser");
 const git = require('simple-git/promise')();
 const sql = require('mysql').createConnection(require("./sql"));
+
 var call = 0,
     invoke = 0,
     log = (msg, inv) => {
@@ -206,8 +207,7 @@ app.get("*", function(req, res) {
 });
 
 app.listen(8080, function() {
-    console.log('\033c');
-    log("Starting Server");
+    log("\033c\nStarting Server");
     console.log(">  Server is Listening");
     log("Connection to MySQL Server");
 });
