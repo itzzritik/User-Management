@@ -15,6 +15,7 @@ html {
   overflow-x: hidden;
   overflow-y: hidden;
   padding-bottom: 50px;
+
 }
 
 body {
@@ -24,6 +25,7 @@ body {
 .container {
   width: 100%;
   margin-top: 50px;
+  transition: all 0.5s cubic-bezier(0.53, 0.09, 0, 0.97);
 }
 
 .element {
@@ -31,7 +33,6 @@ body {
   width: 430px;
   height: 140px;
   float: left;
-  transition: all 0.5s;
 }
 
 .profile {

@@ -172,6 +172,14 @@ http.onload = function() {
 			}
 		}, delay);
 	}
-	addCards(0, 500);
+	if (data.length > 0) addCards(0, 500);
+	else {
+		new Noty({
+			text: "Uh-Uh! No users yet! Are they napping?",
+			type: 'error',
+			theme: 'metroui',
+			layout: (screen.width <= 480) ? 'bottomCenter' : 'topRight'
+		}).show();
+	}
 };
 http.send();
