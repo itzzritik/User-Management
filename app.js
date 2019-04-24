@@ -1,20 +1,36 @@
 const express = require("express");
 const app = express();
 const bodyparser = require("body-parser");
-const clear = require('clear');
 const git = require('simple-git/promise')();
 const sql = require('mysql').createConnection(require("./sql"));
+var call = 0,
+    invoke = 0,
+    log = (msg, inv) => {
+        if (inv == 1) {
+            if (invoke == 1) {
+                call++;
+                console.log();
+            }
+            process.stdout.write("\r" + call + ") " + msg);
+        }
+        else {
+            if (invoke > 0) {
+                invoke = 0;
+                console.log();
+            }
+            console.log("\n" + ++call + ") " + msg);
+        }
+    };
 
 sql.connect((e) => {
     if (e) { console.log(">  Connection Failed \n>  " + e); return; }
     console.log(">  Connection Established");
     setInterval(function() {
         sql.query('SELECT 1');
-        console.log("\n" + ++call + ") Invoking SQL Connection.");
+        log("Invoking SQL Connection (" + ++invoke + ")", 1);
     }, 1200000);
 });
 
-var call = 0;
 app.set("view engine", "ejs");
 app.use('/public', express.static('public'));
 
@@ -30,7 +46,7 @@ app.use(function(req, res, next) {
 
 app.get("/git", function(req, res) {
     var m = req.query.m;
-    console.log("\n" + ++call + ") Pushing to Github");
+    log("Pushing to Github");
     git.add('.')
         .then(
             (addSuccess) => {
@@ -57,7 +73,7 @@ app.get("/git", function(req, res) {
 app.post("/login", function(req, res) {
     var email = req.body.email,
         pass = req.body.pass;
-    console.log("\n" + ++call + ") Authentication Started\n   >  Email: " + email);
+    log("Authentication Started\n   >  Email: " + email);
     sql.query("SELECT password FROM userData WHERE emailId = \"" + email + "\"", function(e, result) {
         if (e) {
             res.send("0");
@@ -87,7 +103,7 @@ app.post("/signup", function(req, res) {
         phoneNo: req.body.ph,
         dateTime: new Date()
     };
-    console.log("\n" + ++call + ") User Creation Started");
+    log("User Creation Started");
     sql.query("SELECT password FROM userData WHERE emailId = \"" + userdata.emailId + "\"", function(e, result) {
         if (e) {
             res.send("0");
@@ -117,7 +133,7 @@ app.post("/signup", function(req, res) {
 app.post("/profile", function(req, res) {
     var email = req.body.email,
         pass = req.body.pass;
-    console.log("\n" + ++call + ") Profile Details Requested\n   >  Email: " + email);
+    log("Profile Details Requested\n   >  Email: " + email);
     sql.query("SELECT * FROM userData WHERE emailId = \"" + email + "\"", function(e, result) {
         if (e) {
             res.send("0");
@@ -138,7 +154,7 @@ app.post("/profile", function(req, res) {
 app.post("/delete", function(req, res) {
     var email = req.body.email,
         pass = req.body.pass;
-    console.log("\n" + ++call + ") Delete Account Requested\n   >  Email: " + email);
+    log("Delete Account Requested\n   >  Email: " + email);
     sql.query("SELECT password FROM userData WHERE emailId = \"" + email + "\"", function(e, result) {
         if (e) {
             res.send("0");
@@ -164,7 +180,7 @@ app.post("/delete", function(req, res) {
 });
 
 app.post("/table", function(req, res) {
-    console.log("\n" + ++call + ") User Data Requested in Admin Panel");
+    log("User Data Requested in Admin Panel");
     sql.query("SELECT * FROM userData ORDER BY dateTime", function(e, result) {
         if (e) {
             res.send("0");
@@ -190,8 +206,8 @@ app.get("*", function(req, res) {
 });
 
 app.listen(8080, function() {
-    clear();
-    console.log("\n" + ++call + ") Starting Server");
+    console.log('\033c');
+    log("Starting Server");
     console.log(">  Server is Listening");
-    console.log("\n" + ++call + ") Connection to MySQL Server");
+    log("Connection to MySQL Server");
 });
