@@ -206,7 +206,7 @@ app.get("*", function(req, res) {
     res.redirect("login");
 });
 
-app.listen(8080, function() {
+app.listen(process.env.PORT || 8080, function() {
     console.log("\033c");
     log("Starting Server");
     console.log(">  Server is Listening");
