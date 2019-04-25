@@ -207,7 +207,8 @@ app.get("*", function(req, res) {
 });
 
 app.listen(8080, function() {
-    log("\033c\nStarting Server");
+    console.log("\033c");
+    log("Starting Server");
     console.log(">  Server is Listening");
     log("Connection to MySQL Server");
 });
