@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const bodyparser = require("body-parser");
 const git = require('simple-git/promise')();
-const sql = require('mysql').createConnection(require("./sql"));
+const sql = require('mysql').createConnection(require("./sql.js"));
 
 var call = 0,
     invoke = 0,
