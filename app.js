@@ -2,12 +2,8 @@ const express = require("express");
 const app = express();
 const bodyparser = require("body-parser");
 const git = require('simple-git/promise')();
-const sql = require('mysql').createConnection({
-    host: 'db-intern.ciupl0p5utwk.us-east-1.rds.amazonaws.com',
-    user: 'dummyUser',
-    password: 'dummyUser01',
-    database: 'db_intern'
-});
+const ip = require("ip");
+const sql = require('mysql').createConnection(require("./sql"));
 
 var call = 0,
     invoke = 0,
@@ -214,6 +210,6 @@ app.get("*", function(req, res) {
 app.listen(process.env.PORT || 8080, function() {
     console.log("\033c");
     log("Starting Server");
-    console.log(">  Server is Listening");
+    console.log(">  Server is running at http://" + (process.env.IP || ip.address() || "localhost") + ":" + (process.env.PORT || "8080"));
     log("Connection to MySQL Server");
 });
