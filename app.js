@@ -210,6 +210,6 @@ app.get("*", function(req, res) {
 app.listen(process.env.PORT || 8080, function() {
     console.log("\033c");
     log("Starting Server");
-    console.log(">  Server is running at http://" + (process.env.IP || ip.address() || "localhost") + ":" + (process.env.PORT || "8080"));
+    console.log(">  Server is running at http://" + (ip.address() || "localhost") + ":" + (process.env.PORT || "8080"));
     log("Connection to MySQL Server");
 });
