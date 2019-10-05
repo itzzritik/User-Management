@@ -3,7 +3,13 @@ const app = express();
 const bodyparser = require("body-parser");
 const git = require('simple-git/promise')();
 const ip = require("ip");
-const sql = require('mysql').createConnection(require("./sql"));
+require('dotenv').config();
+const sql = require('mysql').createConnection({
+    host: process.env.host,
+    user: process.env.user,
+    password: process.env.password,
+    database: process.env.database
+});
 
 var call = 0,
     invoke = 0,

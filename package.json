@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "dotenv": "^8.1.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "ip": "^1.1.5",
