@@ -168,4 +168,4 @@ DELETE FROM userData WHERE emailId = "email@domain.com"
 ## Try Your Hands Now
 **This Web Application** is fully fabricated and ready to be tested. **Go ahead** give it a try.  
 
-[<img src="public/img/demo.png" width="200">](http://3.16.4.70:8080)
+[<img src="public/img/demo.png" width="200">](https://user-dashboard1.herokuapp.com/)
