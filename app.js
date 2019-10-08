@@ -3,48 +3,20 @@ const app = express();
 const bodyparser = require("body-parser");
 const git = require('simple-git/promise')();
 const ip = require("ip");
+const sqlCon = require('express-myconnection');
 require('dotenv').config();
-const sql = require('mysql').createConnection({
-    host: process.env.host,
+
+let dbOptions = {
+	host: process.env.host,
     user: process.env.user,
     password: process.env.password,
     database: process.env.database
-});
+}, call = 0;
 
-var call = 0,
-    invoke = 0,
-    log = (msg, inv) => {
-        if (inv == 1) {
-            if (invoke == 1) {
-                call++;
-                console.log();
-            }
-            process.stdout.write("\r" + call + ") " + msg);
-        }
-        else {
-            if (invoke > 0) {
-                invoke = 0;
-                console.log();
-            }
-            console.log("\n" + ++call + ") " + msg);
-        }
-    };
-
-sql.connect((e) => {
-    if (e) { console.log(">  Connection Failed \n>  " + e); return; }
-    console.log(">  Connection Established");
-    setInterval(function() {
-        sql.query('SELECT 1');
-        log("Invoking SQL Connection (" + ++invoke + ")", 1);
-    }, 600000);
-});
-
+app.use(sqlCon(require('mysql'), dbOptions, 'pool'));
 app.set("view engine", "ejs");
 app.use('/public', express.static('public'));
-
-app.use(bodyparser.urlencoded({
-    extended: true
-}));
+app.use(bodyparser.urlencoded({extended: true}));
 app.use(bodyparser.json());
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -54,7 +26,7 @@ app.use(function(req, res, next) {
 
 app.get("/git", function(req, res) {
     var m = req.query.m;
-    log("Pushing to Github");
+    console.log("\n" + ++call + ") " + "Pushing to Github");
     git.add('.')
         .then(
             (addSuccess) => {
@@ -81,27 +53,29 @@ app.get("/git", function(req, res) {
 app.post("/login", function(req, res) {
     var email = req.body.email,
         pass = req.body.pass;
-    log("Authentication Started\n   >  Email: " + email);
-    sql.query("SELECT password FROM userData WHERE emailId = \"" + email + "\"", function(e, result) {
-        if (e) {
-            res.send("0");
-            console.log(">  Error occured while logging in :\n   >  " + e);
-        }
-        else {
-            if (result.length == 0) {
-                res.send("2");
-                console.log(">  Authentication Terminated : User doesn't exist");
-            }
-            else if (result[0].password == pass) {
-                res.send("1");
-                console.log(">  Authentication Successfull");
+    console.log("\n" + ++call + ") " + "Authentication Started\n   >  Email: " + email);
+    req.getConnection(function(error, sql) {
+		sql.query("SELECT password FROM userData WHERE emailId = \"" + email + "\"",function(e, result, fields) {
+			if (e) {
+                res.send("0");
+                console.log(">  Error occured while logging in :\n   >  " + e);
             }
             else {
-                res.send("0");
-                console.log(">  Authentication Terminated : Invalid Password");
+                if (result.length == 0) {
+                    res.send("2");
+                    console.log(">  Authentication Terminated : User doesn't exist");
+                }
+                else if (result[0].password == pass) {
+                    res.send("1");
+                    console.log(">  Authentication Successfull");
+                }
+                else {
+                    res.send("0");
+                    console.log(">  Authentication Terminated : Invalid Password");
+                }
             }
-        }
-    });
+		});
+	});
 });
 app.post("/signup", function(req, res) {
     var userdata = {
@@ -111,94 +85,102 @@ app.post("/signup", function(req, res) {
         phoneNo: req.body.ph,
         dateTime: new Date()
     };
-    log("User Creation Started");
-    sql.query("SELECT password FROM userData WHERE emailId = \"" + userdata.emailId + "\"", function(e, result) {
-        if (e) {
-            res.send("0");
-            console.log(">  Error occured while logging in :\n   >  " + e);
-        }
-        else {
-            if (result.length == 0) {
-                sql.query("INSERT INTO userData SET ?", userdata, function(e) {
-                    if (e) {
-                        res.send("0");
-                        console.log(">  Error While Creating Account\n   >  " + e);
-                    }
-                    else {
-                        res.send("1");
-                        console.log(userdata);
-                    }
-                });
+    console.log("\n" + ++call + ") " + "User Creation Started");
+    req.getConnection(function(error, sql) {
+		sql.query("SELECT password FROM userData WHERE emailId = \"" + userdata.emailId + "\"",function(e, result, fields) {
+			if (e) {
+                res.send("0");
+                console.log(">  Error occured while logging in :\n   >  " + e);
             }
             else {
-                res.send("2");
-                console.log(">  Account Creation Terminated : User Already Exists");
+                if (result.length == 0) {
+                    sql.query("INSERT INTO userData SET ?", userdata, function(e) {
+                        if (e) {
+                            res.send("0");
+                            console.log(">  Error While Creating Account\n   >  " + e);
+                        }
+                        else {
+                            res.send("1");
+                            console.log(userdata);
+                        }
+                    });
+                }
+                else {
+                    res.send("2");
+                    console.log(">  Account Creation Terminated : User Already Exists");
+                }
             }
-        }
-    });
+		});
+	});
 });
 
 app.post("/profile", function(req, res) {
     var email = req.body.email,
         pass = req.body.pass;
-    log("Profile Details Requested\n   >  Email: " + email);
-    sql.query("SELECT * FROM userData WHERE emailId = \"" + email + "\"", function(e, result) {
-        if (e) {
-            res.send("0");
-            console.log(">  Error occured while fetching profile :\n   >  " + e);
-        }
-        else {
-            res.render("index", {
-                login: 0,
-                email: result[0].emailId,
-                pass: pass,
-                username: result[0].userName,
-                ph: result[0].phoneNo
-            });
-        }
-    });
+    console.log("\n" + ++call + ") " + "Profile Details Requested\n   >  Email: " + email);
+    req.getConnection(function(error, sql) {
+		sql.query("SELECT * FROM userData WHERE emailId = \"" + email + "\"",function(e, result, fields) {
+			if (e) {
+                res.send("0");
+                console.log(">  Error occured while fetching profile :\n   >  " + e);
+            }
+            else {
+                res.render("index", {
+                    login: 0,
+                    email: result[0].emailId,
+                    pass: pass,
+                    username: result[0].userName,
+                    ph: result[0].phoneNo
+                });
+            }
+		});
+	});
 });
 
 app.post("/delete", function(req, res) {
     var email = req.body.email,
         pass = req.body.pass;
-    log("Delete Account Requested\n   >  Email: " + email);
-    sql.query("SELECT password FROM userData WHERE emailId = \"" + email + "\"", function(e, result) {
-        if (e) {
-            res.send("0");
-            console.log(">  Error occured while logging in :\n   >  " + e);
-        }
-        else {
-            if (result.length == 0) { res.send("0"); }
-            else if (result[0].password == pass) {
-                sql.query("DELETE FROM userData WHERE emailId = \"" + email + "\"", function(e, result) {
-                    if (e) {
-                        res.send("0");
-                        console.log(">  Error occured while Deleting account :\n   >  " + e);
-                    }
-                    else {
-                        res.send("1");
-                        console.log(">  Account successfully deleted");
-                    }
-                });
+    console.log("\n" + ++call + ") " + "Delete Account Requested\n   >  Email: " + email);
+    req.getConnection(function(error, sql) {
+		sql.query("SELECT password FROM userData WHERE emailId = \"" + email + "\"",function(e, result, fields) {
+			if (e) {
+                res.send("0");
+                console.log(">  Error occured while logging in :\n   >  " + e);
             }
-            else { res.send("0"); }
-        }
-    });
+            else {
+                if (result.length == 0) { res.send("0"); }
+                else if (result[0].password == pass) {
+                    sql.query("DELETE FROM userData WHERE emailId = \"" + email + "\"", function(e, result) {
+                        if (e) {
+                            res.send("0");
+                            console.log(">  Error occured while Deleting account :\n   >  " + e);
+                        }
+                        else {
+                            res.send("1");
+                            console.log(">  Account successfully deleted");
+                        }
+                    });
+                }
+                else { res.send("0"); }
+            }
+		});
+	});
 });
 
 app.post("/table", function(req, res) {
-    log("User Data Requested in Admin Panel");
-    sql.query("SELECT * FROM userData ORDER BY dateTime", function(e, result) {
-        if (e) {
-            res.send("0");
-            console.log("  > Error occured while fetching table :\n   >  " + e);
-        }
-        else {
-            res.json(result);
-            console.log("  > Fetched and sent successfully");
-        }
-    });
+    console.log("\n" + ++call + ") " + "User Data Requested in Admin Panel");
+    req.getConnection(function(error, sql) {
+		sql.query("SELECT * FROM userData ORDER BY dateTime",function(e, result, fields) {
+			if (e) {
+                res.send("0");
+                console.log("  > Error occured while fetching table :\n   >  " + e);
+            }
+            else {
+                res.json(result);
+                console.log("  > Fetched and sent successfully");
+            }
+		});
+	});
 });
 
 app.post("/admin", function(req, res) {
@@ -215,7 +197,7 @@ app.get("*", function(req, res) {
 
 app.listen(process.env.PORT || 8080, function() {
     console.log("\033c");
-    log("Starting Server");
+    console.log("\n" + ++call + ") " + "Starting Server");
     console.log(">  Server is running at http://" + (ip.address() || "localhost") + ":" + (process.env.PORT || "8080"));
-    log("Connection to MySQL Server");
+    //console.log("\n" + ++call + ") " + "Connection to MySQL Server");
 });
