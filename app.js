@@ -36,7 +36,7 @@ sql.connect((e) => {
     setInterval(function() {
         sql.query('SELECT 1');
         log("Invoking SQL Connection (" + ++invoke + ")", 1);
-    }, 1200000);
+    }, 2100000);
 });
 
 app.set("view engine", "ejs");
