@@ -7,10 +7,11 @@ const sqlCon = require('express-myconnection');
 require('dotenv').config();
 
 let dbOptions = {
-	host: process.env.host,
+    host: process.env.host,
+    port: process.env.port,
     user: process.env.user,
     password: process.env.password,
-    database: process.env.database
+    database: process.env.database,
 }, call = 0;
 
 app.use(sqlCon(require('mysql'), dbOptions, 'pool'));
@@ -82,8 +83,7 @@ app.post("/signup", function(req, res) {
         userName: req.body.username,
         emailId: req.body.email,
         password: req.body.pass,
-        phoneNo: req.body.ph,
-        dateTime: new Date()
+        phoneNo: req.body.ph
     };
     console.log("\n" + ++call + ") " + "User Creation Started");
     req.getConnection(function(error, sql) {
@@ -199,5 +199,4 @@ app.listen(process.env.PORT || 8080, function() {
     console.log("\033c");
     console.log("\n" + ++call + ") " + "Starting Server");
     console.log(">  Server is running at http://" + (ip.address() || "localhost") + ":" + (process.env.PORT || "8080"));
-    //console.log("\n" + ++call + ") " + "Connection to MySQL Server");
 });
