@@ -1,4 +1,6 @@
 # User Management
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FItzzRitik%2FUser-Management.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FItzzRitik%2FUser-Management?ref=badge_shield)
+
 
 **User management** describes the ability for administrators to manage user access to various IT resources like systems, devices, applications, storage systems, networks and more. **User management** is a core part to any directory service and is a basic security essential for any organization. **User management** enables admins to control user access and **on-board** and **off-board** users to and from IT resources. Subsequently a directory service will then **authenticate**, **authorize**, and **audit user access** to IT resources based on what the **IT admin** had dictated.
 
@@ -169,3 +171,7 @@ DELETE FROM userData WHERE emailId = "email@domain.com"
 **This Web Application** is fully fabricated and ready to be tested. **Go ahead** give it a try.  
 
 [<img src="public/img/demo.png" width="200">](http://usersdashboard.herokuapp.com/)
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FItzzRitik%2FUser-Management.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FItzzRitik%2FUser-Management?ref=badge_large)
