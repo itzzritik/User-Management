@@ -164,6 +164,10 @@ DELETE FROM userData WHERE emailId = "email@domain.com"
 <img src="Screenshots/admin.png" width="100%">
 
 ---
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FItzzRitik%2FUser-Management.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FItzzRitik%2FUser-Management?ref=badge_large)
+
+---
   
 ## Try Your Hands Now
 **This Web Application** is fully fabricated and ready to be tested. **Go ahead** give it a try.  
