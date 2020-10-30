@@ -20,13 +20,13 @@ app.set("view engine", "ejs");
 app.use('/public', express.static('public'));
 app.use(bodyparser.urlencoded({extended: true}));
 app.use(bodyparser.json());
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
 
-app.get("/git", function(req, res) {
+app.get("/git", (req, res) => {
     var m = req.query.m;
     console.log("\n" + ++call + ") " + "Pushing to Github");
     git.add('.')
@@ -52,12 +52,12 @@ app.get("/git", function(req, res) {
     res.send("1");
 });
 
-app.post("/login", function(req, res) {
+app.post("/login", (req, res) => {
     var email = req.body.email,
         pass = req.body.pass;
     console.log("\n" + ++call + ") " + "Authentication Started\n   >  Email: " + email);
-    req.getConnection(function(error, sql) {
-		sql.query("SELECT password FROM userData WHERE emailId = \"" + email + "\"",function(e, result, fields) {
+    req.getConnection((error, sql) => {
+		sql.query("SELECT password FROM userData WHERE emailId = \"" + email + "\"", (e, result, fields) => {
 			if (e) {
                 res.send("0");
                 console.log(">  Error occured while logging in :\n   >  " + e);
@@ -79,7 +79,7 @@ app.post("/login", function(req, res) {
 		});
 	});
 });
-app.post("/signup", function(req, res) {
+app.post("/signup", (req, res) => {
     var userdata = {
         userName: req.body.username,
         emailId: req.body.email,
@@ -87,15 +87,15 @@ app.post("/signup", function(req, res) {
         phoneNo: req.body.ph
     };
     console.log("\n" + ++call + ") " + "User Creation Started");
-    req.getConnection(function(error, sql) {
-		sql.query("SELECT password FROM userData WHERE emailId = \"" + userdata.emailId + "\"",function(e, result, fields) {
+    req.getConnection((error, sql) => {
+		sql.query("SELECT password FROM userData WHERE emailId = \"" + userdata.emailId + "\"", (e, result, fields) => {
 			if (e) {
                 res.send("0");
                 console.log(">  Error occured while logging in :\n   >  " + e);
             }
             else {
                 if (result.length == 0) {
-                    sql.query("INSERT INTO userData SET ?", userdata, function(e) {
+                    sql.query("INSERT INTO userData SET ?", userdata, (e) => {
                         if (e) {
                             res.send("0");
                             console.log(">  Error While Creating Account\n   >  " + e);
@@ -115,12 +115,12 @@ app.post("/signup", function(req, res) {
 	});
 });
 
-app.post("/profile", function(req, res) {
+app.post("/profile", (req, res) => {
     var email = req.body.email,
         pass = req.body.pass;
     console.log("\n" + ++call + ") " + "Profile Details Requested\n   >  Email: " + email);
-    req.getConnection(function(error, sql) {
-		sql.query("SELECT * FROM userData WHERE emailId = \"" + email + "\"",function(e, result, fields) {
+    req.getConnection((error, sql) => {
+		sql.query("SELECT * FROM userData WHERE emailId = \"" + email + "\"", (e, result, fields) => {
 			if (e) {
                 res.send("0");
                 console.log(">  Error occured while fetching profile :\n   >  " + e);
@@ -138,12 +138,12 @@ app.post("/profile", function(req, res) {
 	});
 });
 
-app.post("/delete", function(req, res) {
+app.post("/delete", (req, res) => {
     var email = req.body.email,
         pass = req.body.pass;
     console.log("\n" + ++call + ") " + "Delete Account Requested\n   >  Email: " + email);
-    req.getConnection(function(error, sql) {
-		sql.query("SELECT password FROM userData WHERE emailId = \"" + email + "\"",function(e, result, fields) {
+    req.getConnection((error, sql) => {
+		sql.query("SELECT password FROM userData WHERE emailId = \"" + email + "\"", (e, result, fields) => {
 			if (e) {
                 res.send("0");
                 console.log(">  Error occured while logging in :\n   >  " + e);
@@ -151,7 +151,7 @@ app.post("/delete", function(req, res) {
             else {
                 if (result.length == 0) { res.send("0"); }
                 else if (result[0].password == pass) {
-                    sql.query("DELETE FROM userData WHERE emailId = \"" + email + "\"", function(e, result) {
+                    sql.query("DELETE FROM userData WHERE emailId = \"" + email + "\"", (e, result) => {
                         if (e) {
                             res.send("0");
                             console.log(">  Error occured while Deleting account :\n   >  " + e);
@@ -168,10 +168,10 @@ app.post("/delete", function(req, res) {
 	});
 });
 
-app.post("/table", function(req, res) {
+app.post("/table", (req, res) => {
     console.log("\n" + ++call + ") " + "User Data Requested in Admin Panel");
-    req.getConnection(function(error, sql) {
-		sql.query("SELECT * FROM userData ORDER BY dateTime",function(e, result, fields) {
+    req.getConnection((error, sql) => {
+		sql.query("SELECT * FROM userData ORDER BY dateTime", (e, result, fields) => {
 			if (e) {
                 res.send("0");
                 console.log("  > Error occured while fetching table :\n   >  " + e);
@@ -184,15 +184,15 @@ app.post("/table", function(req, res) {
 	});
 });
 
-app.post("/admin", function(req, res) {
+app.post("/admin", (req, res) => {
     res.render("admin");
 });
 
-app.get("/login", function(req, res) {
+app.get("/login", (req, res) => {
     res.render("index", { login: 1 });
 });
 
-app.get("*", function(req, res) {
+app.get("*", (req, res) => {
     res.redirect("login");
 });
 
