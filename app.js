@@ -1,8 +1,8 @@
-const express = require("express");
-const app = express();
-const bodyparser = require("body-parser");
-const git = require('simple-git/promise')();
-const ip = require("ip");
+const express = require("express"),
+    app = express(),
+    bodyparser = require("body-parser"),
+    git = require('simple-git/promise')(),
+    ip = require("ip");
 const sqlCon = require('express-myconnection');
 require('dotenv').config();
 
