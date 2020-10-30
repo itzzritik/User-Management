@@ -2,8 +2,9 @@ const express = require("express"),
     app = express(),
     bodyparser = require("body-parser"),
     git = require('simple-git/promise')(),
-    ip = require("ip");
-const sqlCon = require('express-myconnection');
+    ip = require("ip"),
+    sqlCon = require('express-myconnection');
+
 require('dotenv').config();
 
 let dbOptions = {
