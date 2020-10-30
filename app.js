@@ -196,7 +196,7 @@ app.get("*", (req, res) => {
     res.redirect("login");
 });
 
-app.listen(process.env.PORT || 8080, function() {
+app.listen(process.env.PORT || 8080, () => {
     console.log("\033c");
     console.log("\n" + ++call + ") " + "Starting Server");
     console.log(">  Server is running at http://" + (ip.address() || "localhost") + ":" + (process.env.PORT || "8080"));
